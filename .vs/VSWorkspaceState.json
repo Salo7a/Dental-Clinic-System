@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\config",
+    "\\migrations",
+    "\\models",
+    "\\public",
+    "\\public\\stylesheets",
+    "\\routes",
+    "\\views"
+  ],
+  "SelectedNode": "\\migrations\\MED.js",
+  "PreviewInSolutionExplorer": false
+}
