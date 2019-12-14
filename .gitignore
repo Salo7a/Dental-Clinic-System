@@ -105,4 +105,8 @@ dist
 
 #Idea IDEs
 .idea
+
+#VS Code
+/.vs/
+
 © 2019 GitHub, Inc.
