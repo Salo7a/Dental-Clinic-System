@@ -19,13 +19,9 @@
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
     "mysql2": "^2.0.2",
-<<<<<<< HEAD
-    "sequelize": "^5.21.3",
-=======
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "sequelize": "^5.21.2",
->>>>>>> cb7d48cd3216c37386a6bf9b0012bb654b75ab08
     "sequelize-cli": "^5.5.1"
   },
   "devDependencies": {
