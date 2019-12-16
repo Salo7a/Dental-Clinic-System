@@ -3,14 +3,14 @@ var router = express.Router();
 const {isAuth} = require('../utils/filters');
 /* GET home page. */
 router.get('/', function (req, res, next) {
-  res.render('defaultpanel', {
-    title: 'Express',
+  res.render('home', {
+    title: 'Home',
     user: req.user
   });
 });
-router.get('/test', function (req, res, next) {
-  res.render('test', {
-    title: 'Express',
+router.get('/panel', function (req, res, next) {
+  res.render('defaultpanel', {
+    title: 'Panel Demo',
     user: req.user
   });
 });
