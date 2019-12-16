@@ -8,5 +8,10 @@ router.get('/', isAuth, function (req, res, next) {
     user: req.user
   });
 });
-
+router.get('/test', function (req, res, next) {
+  res.render('test', {
+    title: 'Express',
+    user: req.user
+  });
+});
 module.exports = router;
