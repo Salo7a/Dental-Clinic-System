@@ -1,0 +1,12 @@
+<script src="/plugins/toastr/toastr.min.js"></script>
+<script>
+    <% if(typeof errors != 'undefined'){ %> <% errors.forEach(function(error) { %>
+    toastr.error("<%= error.msg %>");
+    <% }); %> <% } %> <% if(success_msg != ''){ %>
+    toastr.success("<%= success_msg %>");
+    <% } %> <% if(error_msg != ''){ %>
+    toastr.error("<%= error.msg %>");
+    <% } %> <% if(error != ''){ %>
+    toastr.error("<%= error %>");
+    <% } %>
+</script>
