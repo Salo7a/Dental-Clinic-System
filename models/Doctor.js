@@ -5,14 +5,23 @@ module.exports = (sequelize, DataTypes) => {
     const Doctor = sequelize.define('Doctor', {
         Name: DataTypes.STRING,
         NID: {
-            type: DataTypes.STRING
-            // unique: true,
+            type: DataTypes.STRING,
+            unique: true,
+            allowNull: false
         },
-        Email: DataTypes.STRING,
+        Email: {
+            type: DataTypes.STRING,
+            isEmail: true
+        },
+        Phone: DataTypes.STRING,
         Password: DataTypes.STRING,
         isDoctor: {
             type: DataTypes.BOOLEAN,
             defaultValue: true
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         },
         isAdmin: {
             type: DataTypes.BOOLEAN,

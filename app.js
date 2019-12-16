@@ -7,7 +7,7 @@ const db = require('./models/index');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
-
+const engine = require('ejs-mate');
 var passportConfig = require('./config/passport');
 
 const authRouter = require('./routes/auth');
@@ -27,6 +27,7 @@ db.sequelize
     .catch(err => console.log('Error: ' + err));
 
 // view engine setup
+app.engine('ejs', engine);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
@@ -35,6 +36,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser('secret'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/dist', express.static(path.join(__dirname, 'node_modules/admin-lte/dist')));
+app.use('/plugins', express.static(path.join(__dirname, 'node_modules/admin-lte/plugins')));
+
 
 //Express Session
 app.use(session({
