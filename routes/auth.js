@@ -2,8 +2,10 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 const Doctor = require('../models').Doctor;
-const {NotAuth} = require('../utils/filters');
+const Patient = require('../models').Patient;
+const {NotAuth, isAuth} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
+const {Op} = require('sequelize');
 
 
 router.get('/login', NotAuth, function (req, res, next) {
@@ -47,57 +49,107 @@ router.post('/register', [
         });
         //res.status(422).json({ errors: errors.array() });
     }
-    const {name, email, nid, password, phone} = req.body;
-    Doctor.findOne({
-        where: {
-            [Op.or]: [
-                {Email: email},
-                {Phone: phone},
-                {NID: nid}
-            ]
-        },
-        attributes: ['email']
-    })
-        .then(doctor => {
-            if (!doctor) {
-                // create that user as no one by that username exists
-                Doctor.create({
-                    Name: name,
-                    Email: email,
-                    NID: nid,
-                    Password: password,
-                    Phone: phone
-                })
-                    .then(function () {
-                            // set the flash message to indicate that user was
-                            // registered successfully
-                            req.flash('success' +
-                                '_msg', 'The user was registered successfully');
-                            // finally redirect to login page, so that they can login
-                            // and start using our features
-                            res.redirect('/auth/login');
-                        }
-                    ).catch(function (err, user) {
-                        throw err;
+    const {name, email, nid, password, phone, doctor} = req.body;
+    if (doctor === "true") {
+        Doctor.findOne({
+            where: {
+                [Op.or]: [
+                    {Email: email},
+                    {Phone: phone},
+                    {NID: nid}
+                ]
+            },
+            attributes: ['email']
+        })
+            .then(doctor => {
+                if (!doctor) {
+                    // create that user as no one by that username exists
+                    Doctor.create({
+                        Name: name,
+                        Email: email,
+                        NID: nid,
+                        Password: password,
+                        Phone: phone
+                    })
+                        .then(function () {
+                                // set the flash message to indicate that user was
+                                // registered successfully
+                                req.flash('success' +
+                                    '_msg', 'The user was registered successfully');
+                                // finally redirect to login page, so that they can login
+                                // and start using our features
+                                res.redirect('/auth/login');
+                            }
+                        ).catch(function (err, user) {
+                            throw err;
 
-                    }
-                );
-            } else {
-                // there's already someone with that username
-                res.render('register', {
-                    user: req.user,
-                    message: "Account Already Exists",
-                    title: "Register"
-                });
-            }
+                        }
+                    );
+                } else {
+                    // there's already someone with that username
+                    res.render('register', {
+                        user: req.user,
+                        message: "Account Already Exists",
+                        title: "Register"
+                    });
+                }
+            })
+            .catch(function (err) {
+                throw err;
+            })
+    } else {
+        Patient.findOne({
+            where: {
+                [Op.or]: [
+                    {Email: email},
+                    {Phone: phone},
+                    {NID: nid}
+                ]
+            },
+            attributes: ['email']
         })
-        .catch(function (err) {
-            throw err;
-        })
+            .then(patient => {
+                if (!patient) {
+                    // create that user as no one by that username exists
+                    Patient.create({
+                        Name: name,
+                        Email: email,
+                        NID: nid,
+                        Password: password,
+                        Phone: phone
+                    })
+                        .then(function () {
+                                // set the flash message to indicate that user was
+                                // registered successfully
+                                req.flash('success' +
+                                    '_msg', 'The user was registered successfully');
+                                // finally redirect to login page, so that they can login
+                                // and start using our features
+                                res.redirect('/auth/login');
+                            }
+                        ).catch(function (err, user) {
+                            throw err;
+
+                        }
+                    );
+                } else {
+                    // there's already someone with that username
+                    res.render('register', {
+                        user: req.user,
+                        message: "Account Already Exists",
+                        title: "Register"
+                    });
+                }
+            })
+            .catch(function (err) {
+                throw err;
+            })
+    }
+
 
 });
 
-router.get('/logout', NotAuth, function (req, res, next) {
+router.get('/logout', isAuth, function (req, res, next) {
     req.logout();
     req.flash('success_msg', "You're Logged Out");
     res.redirect('/auth/login');

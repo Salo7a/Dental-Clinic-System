@@ -28,78 +28,182 @@
 
     <div class="card">
         <div class="card-body register-card-body">
-            <p class="login-box-msg">Create An Account</p>
+            <p class="login-box-msg" style="font-size: 30px; padding-bottom: 5px ">I'm a</p>
+            <ul class="nav nav-pills ml-auto p-2" id="myTab" role="tablist">
+                <li style="margin-left: 10%" class="nav-item">
+                    <div data-toggle="tab" href="#doctor" role="tab" aria-controls="home" aria-selected="true"
+                         class="nav-link active">
+                        <i class="fas fa-user-md fa-7x"></i>
+                        <p class="login-box-msg" style="font-size: 20px; margin-top: 10px; padding-bottom: 2px ">
+                            Doctor</p>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <div class="nav-link" id="patient-login" data-toggle="tab" href="#patient" role="tab"
+                         aria-controls="profile" aria-selected="false">
+                        <i data-toggle="tab" role="tab" href="#patient" class="fas fa-user-injured fa-7x"></i>
+                        <p class="login-box-msg" style="font-size: 20px; margin-top: 10px; padding-bottom: 2px">
+                            Patient</p>
+                    </div>
 
-            <form method="post">
-                <div class="input-group mb-3">
-                    <input required type="text" name="name"
-                    <% if(typeof req != 'undefined'){ %> value="<%= req.name %>"
-                            <% } %>
-                           class="form-control" placeholder="Full Name">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-user"></span>
+                </li>
+            </ul>
+            <div class="tab-pane fade show active" id="doctor" role="tabpanel" aria-labelledby="doctor">
+                <p class="login-box-msg">Create A Doctor's Account</p>
+                <form method="post">
+                    <input hidden type="text" name="doctor" value="true">
+                    <div class="input-group mb-3">
+                        <input required type="text" name="name"
+                        <% if(typeof req != 'undefined'){ %> value="<%= req.name %>"
+                                <% } %>
+                               class="form-control" placeholder="Full Name">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="input-group mb-3">
-                    <input required type="email" name="email"
-                    <% if(typeof req != 'undefined'){ %> value="<%= req.email %>"
-                            <% } %>
-                           class="form-control" placeholder="Email">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                    <div class="input-group mb-3">
+                        <input required type="email" name="email"
+                        <% if(typeof req != 'undefined'){ %> value="<%= req.email %>"
+                                <% } %>
+                               class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="input-group mb-3">
-                    <input required type="text" name="nid" class="form-control"
-                    <% if(typeof req != 'undefined'){ %> value="<%= req.nid %>"
-                            <% } %>
-                           placeholder="National ID">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-id-card"></span>
+                    <div class="input-group mb-3">
+                        <input required type="text" name="nid" class="form-control"
+                        <% if(typeof req != 'undefined'){ %> value="<%= req.nid %>"
+                                <% } %>
+                               placeholder="National ID">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-id-card"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="input-group mb-3">
-                    <input required type="text" name="phone" class="form-control"
-                    <% if(typeof req != 'undefined'){ %> value="<%= req.phone %>"
-                            <% } %>
-                           placeholder="Phone Number">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-phone"></span>
+                    <div class="input-group mb-3">
+                        <input required type="text" name="phone" class="form-control"
+                        <% if(typeof req != 'undefined'){ %> value="<%= req.phone %>"
+                                <% } %>
+                               placeholder="Phone Number">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-phone"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="input-group mb-3">
-                    <input required type="password" name="password" class="form-control" placeholder="Password">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                    <div class="input-group mb-3">
+                        <input required type="password" name="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="input-group mb-3">
-                    <input required type="password" name="password2" class="form-control" placeholder="Retype password">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
+                    <div class="input-group mb-3">
+                        <input required type="password" name="password2" class="form-control"
+                               placeholder="Retype password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <!-- /.col -->
-                    <div class="col-12">
-                        <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    <div class="input-group mb-3">
+                        <input required type="text" name="invite" class="form-control" placeholder="Invitation Code">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-file-invoice"></span>
+                            </div>
+                        </div>
                     </div>
-                    <!-- /.col -->
-                </div>
-            </form>
-
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="patient" role="tabpanel" aria-labelledby="patient">
+                <p class="login-box-msg">Sign In To Start Using Your Patient's Portal </p>
+                <form method="post">
+                    <input hidden type="text" name="doctor" value="false">
+                    <div class="input-group mb-3">
+                        <input required type="text" name="name"
+                        <% if(typeof req != 'undefined'){ %> value="<%= req.name %>"
+                                <% } %>
+                               class="form-control" placeholder="Full Name">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-user"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input required type="email" name="email"
+                        <% if(typeof req != 'undefined'){ %> value="<%= req.email %>"
+                                <% } %>
+                               class="form-control" placeholder="Email">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input required type="text" name="nid" class="form-control"
+                        <% if(typeof req != 'undefined'){ %> value="<%= req.nid %>"
+                                <% } %>
+                               placeholder="National ID">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-id-card"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input required type="text" name="phone" class="form-control"
+                        <% if(typeof req != 'undefined'){ %> value="<%= req.phone %>"
+                                <% } %>
+                               placeholder="Phone Number">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-phone"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input required type="password" name="password" class="form-control" placeholder="Password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input required type="password" name="password2" class="form-control"
+                               placeholder="Retype password">
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- /.col -->
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary btn-block">Register</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+            </div>
             <a href="/auth/login" class="text-center">Already Have An Account?</a>
         </div>
         <!-- /.form-box -->

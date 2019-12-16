@@ -26,7 +26,9 @@ module.exports = (sequelize, DataTypes) => {
         isAdmin: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
-        }
+        },
+        ActiveHash: DataTypes.STRING
+
     }, {
         classMethods: {
             comparePassword: async function (Password, hash) {
@@ -41,16 +43,16 @@ module.exports = (sequelize, DataTypes) => {
         },
 
     });
-    Doctor.associate = function (models) {
-        // models.Doctor.hasMany(models.Patient);
+    //Doctor.associate = function (models) {
+    // models.Doctor.hasMany(models.Patient);
         // models.Doctor.hasMany(models.Appointments);
         // models.Doctor.belongsTo(models.Department, {
         //     onDelete: "CASCADE",
         //     foreignKey: {
         //         allowNull: false
         //     }
-        // });
-    };
+    // });
+    // };
     // This hook is called when an entry is being added to the back end.
     // This method is used to hash the password before storing it
     // in our database.
@@ -91,7 +93,24 @@ module.exports = (sequelize, DataTypes) => {
         //     throw new Error();})
         //
     };
+    Doctor.afterCreate((Doctor, options) => {
+        if (Doctor.id < 54000) {
+            sequelize.query("ALTER TABLE doctors AUTO_INCREMENT = 54001;").then(([results, metadata]) => {
+                sequelize.query("UPDATE doctors SET id = id + 54000;").then(([results, metadata]) => {
+                    // Results will be an empty array and metadata will contain the number of affected rows.
+                })
+            })
+        } else {
 
+        }
+
+    });
+    Doctor.afterUpdate((Doctor, options) => {
+        if (Doctor.id < 54000) {
+            Doctor.id = Doctor.id + 54000;
+        }
+
+    });
 
     return Doctor;
 };

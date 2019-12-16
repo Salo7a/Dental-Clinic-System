@@ -1,3 +1,5 @@
+'use strict';
+const bcrypt = require('bcryptjs');
 
 module.exports = (sequelize, DataTypes) => {
 	const Patient = sequelize.define('Patient', {
@@ -7,21 +9,26 @@ module.exports = (sequelize, DataTypes) => {
 			// unique: true,
 		},
 		Birthdate: DataTypes.DATE,
-		History :
+		History:
 			{
 				type :DataTypes.STRING ,
 				defaultValue : 'no record available'
 			},
-		Password : DataTypes.STRING(128),
-		Insurance : DataTypes.BOOLEAN ,
-		Phone: DataTypes.STRING ,
-		Address : DataTypes.STRING,
-		Email :
+		Password: DataTypes.STRING(128),
+		Insurance: DataTypes.BOOLEAN,
+		Phone: DataTypes.STRING,
+		Address: DataTypes.STRING,
+		Email:
 			{
-				type : DataTypes.STRING ,
-				isEmail : true ,
-				isNull : false
-			}
+				type: DataTypes.STRING,
+				isEmail: true,
+				isNull: false
+			},
+		isActive: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
+		},
+		ActiveHash: DataTypes.STRING
 	}, {
 		classMethods: {
 			comparePassword: async function (Password, hash) {

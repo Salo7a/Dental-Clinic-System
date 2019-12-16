@@ -10,6 +10,7 @@ const passport = require('passport');
 const engine = require('ejs-mate');
 var passportConfig = require('./config/passport');
 
+
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -50,7 +51,6 @@ app.use(session({
 // Auth Middleware
 app.use(passport.initialize());
 app.use(passport.session());
-
 //Flash
 app.use(flash());
 
