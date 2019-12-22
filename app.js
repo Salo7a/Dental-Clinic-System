@@ -14,11 +14,8 @@ var passportConfig = require('./config/passport');
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-<<<<<<< HEAD
 const PatientProfile = require('./routes/Patient_Profile');
-=======
 const patientViewingRouter = require('./routes/patientPage');
->>>>>>> 06f66dcda1a5a528b3dd8b2f56888325668bd6e4
 
 let app = express();
 
