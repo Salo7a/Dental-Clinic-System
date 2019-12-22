@@ -27,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         },
-        ActiveHash: DataTypes.STRING
+        ActiveHash: DataTypes.STRING,
+        Photo: DataTypes.STRING
 
     }, {
         classMethods: {

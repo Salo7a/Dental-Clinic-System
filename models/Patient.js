@@ -24,11 +24,16 @@ module.exports = (sequelize, DataTypes) => {
 				isEmail: true,
 				isNull: false
 			},
+		isPatient: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: true
+		},
 		isActive: {
 			type: DataTypes.BOOLEAN,
 			defaultValue: false
 		},
-		ActiveHash: DataTypes.STRING
+		ActiveHash: DataTypes.STRING,
+		Photo: DataTypes.STRING
 	}, {
 		classMethods: {
 			comparePassword: async function (Password, hash) {

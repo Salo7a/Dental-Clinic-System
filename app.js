@@ -47,14 +47,14 @@ app.use(session({
   resave: true,
   saveUninitialized: true,
 }));
-
+console.log(process.env.SENDGRID_API_KEY);
 // Auth Middleware
 app.use(passport.initialize());
 app.use(passport.session());
+
 //Flash
 app.use(flash());
 
-//Global Flashes
 app.use(function (req, res, next) {
   res.locals.success_msg = req.flash('success_msg');
   res.locals.error_msg = req.flash('error_msg');

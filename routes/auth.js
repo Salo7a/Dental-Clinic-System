@@ -6,6 +6,10 @@ const Patient = require('../models').Patient;
 const {NotAuth, isAuth} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
 const {Op} = require('sequelize');
+const Chance = require('chance');
+require('dotenv').config();
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 
 router.get('/login', NotAuth, function (req, res, next) {
@@ -49,6 +53,7 @@ router.post('/register', [
         });
         //res.status(422).json({ errors: errors.array() });
     }
+    let chance = new Chance();
     const {name, email, nid, password, phone, doctor} = req.body;
     if (doctor === "true") {
         Doctor.findOne({
@@ -63,15 +68,27 @@ router.post('/register', [
         })
             .then(doctor => {
                 if (!doctor) {
+                    let hash = chance.string({length: 128});
                     // create that user as no one by that username exists
                     Doctor.create({
                         Name: name,
                         Email: email,
                         NID: nid,
                         Password: password,
-                        Phone: phone
+                        Phone: phone,
+                        ActiveHash: hash
                     })
                         .then(function () {
+                                const msg = {
+                                    to: email,
+                                    from: 'no-reply@ieeecusb.org',
+                                    subject: 'Verify Your DCareMax Account',
+                                    templateId: 'd-b94fbfd3648a4a60b14eee5d6b6e147c',
+                                    dynamic_template_data: {
+                                        hash: hash,
+                                    }
+                                };
+                                sgMail.send(msg);
                                 // set the flash message to indicate that user was
                                 // registered successfully
                                 req.flash('success' +
@@ -106,19 +123,33 @@ router.post('/register', [
                     {NID: nid}
                 ]
             },
-            attributes: ['email']
+            attributes: ['email'],
         })
             .then(patient => {
                 if (!patient) {
+                    let hash = chance.string({length: 128});
+
                     // create that user as no one by that username exists
                     Patient.create({
                         Name: name,
                         Email: email,
                         NID: nid,
                         Password: password,
-                        Phone: phone
+                        Phone: phone,
+                        ActiveHash: hash
                     })
                         .then(function () {
+                                const msg = {
+                                    to: email,
+                                    from: 'no-reply@ieeecusb.org',
+                                    subject: 'Verify Your DCareMax Account',
+                                    templateId: 'd-b94fbfd3648a4a60b14eee5d6b6e147c',
+                                    dynamic_template_data: {
+                                        hash: hash,
+                                    }
+                                };
+                                sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+                                sgMail.send(msg);
                                 // set the flash message to indicate that user was
                                 // registered successfully
                                 req.flash('success' +
@@ -154,4 +185,35 @@ router.get('/logout', isAuth, function (req, res, next) {
     req.flash('success_msg', "You're Logged Out");
     res.redirect('/auth/login');
 });
+
+router.get('/verify/:hash', NotAuth, function (req, res, next) {
+    Doctor
+        .findOne({where: {ActiveHash: req.params.hash}})
+        .then(doctor => {
+            if (!doctor) {
+                Patient
+                    .findOne({where: {ActiveHash: req.params.hash}})
+                    .then(patient => {
+                        if (!patient) {
+
+                        } else {
+                            patient.update(
+                                {
+                                    isActive: true,
+                                    ActiveHash: NULL
+                                }
+                            )
+                        }
+                    })
+            } else {
+                doctor.update({
+                    isActive: true,
+                    ActiveHash: NULL
+                });
+
+            }
+        });
+});
+
+
 module.exports = router;
