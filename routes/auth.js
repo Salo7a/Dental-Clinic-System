@@ -10,12 +10,22 @@ const Chance = require('chance');
 require('dotenv').config();
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const faker = require('faker');
 
 
 router.get('/login', NotAuth, function (req, res, next) {
     res.render('login', {title: 'Login'});
 });
+router.get('/add', NotAuth, function (req, res, next) {
+    let i;
+    for (i = 0; i < 10; i++) {
+        Doctor.create({
+            Name: faker.name.findName(),
 
+        });
+
+    }
+});
 router.post('/login', NotAuth, function (req, res, next) {
     passport.authenticate('local', {
         successRedirect: '/',
