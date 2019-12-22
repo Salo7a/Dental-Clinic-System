@@ -54,7 +54,7 @@ router.post('/register', [
         //res.status(422).json({ errors: errors.array() });
     }
     let chance = new Chance();
-    const {name, email, nid, password, phone, doctor} = req.body;
+    const {name, email, nid, password, phone, doctor, title} = req.body;
     if (doctor === "true") {
         Doctor.findOne({
             where: {
@@ -76,7 +76,8 @@ router.post('/register', [
                         NID: nid,
                         Password: password,
                         Phone: phone,
-                        ActiveHash: hash
+                        ActiveHash: hash,
+                        Title: title
                     })
                         .then(function () {
                                 const msg = {

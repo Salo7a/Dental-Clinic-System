@@ -13,10 +13,16 @@ var passportConfig = require('./config/passport');
 
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
+<<<<<<< HEAD
 const usersRouter = require('./routes/users')
 const PatientProfile = require('./routes/Patient_Profile');
 const patientViewingRouter = require('./routes/patientPage');
 const medication=require('./routes/medication')
+=======
+const usersRouter = require('./routes/users');
+const PatientProfile = require('./routes/Patient_Profile');
+const patientViewingRouter = require('./routes/patientPage');
+>>>>>>> 990021b79f02e9fc5c93df2ca272ff68303874c4
 
 let app = express();
 
