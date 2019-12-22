@@ -46,8 +46,8 @@ router.get('/add', NotAuth, function (req, res, next) {
             Price: faker.commerce.price(),
             END: faker.date.future()
         })
-
     }
+    res.redirect('/patient/viewDoctors');
 });
 router.get('/add2', NotAuth, function (req, res, next) {
     Doctor.create({
@@ -68,7 +68,7 @@ router.get('/add2', NotAuth, function (req, res, next) {
         Phone: faker.phone.phoneNumber(),
         Password: "password"
     });
-
+    res.redirect('/patient/viewDoctors');
 });
 router.post('/login', NotAuth, function (req, res, next) {
     passport.authenticate('local', {
