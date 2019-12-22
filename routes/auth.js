@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const Doctor = require('../models').Doctor;
 const Patient = require('../models').Patient;
+const Medication = require('../models').Medication;
 const {NotAuth, isAuth} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
 const {Op} = require('sequelize');
@@ -21,10 +22,53 @@ router.get('/add', NotAuth, function (req, res, next) {
     for (i = 0; i < 10; i++) {
         Doctor.create({
             Name: faker.name.findName(),
-
+            NID: faker.random.number(),
+            Email: faker.internet.email(),
+            Phone: faker.phone.phoneNumber(),
+            Title: faker.name.title(),
+            Password: "password"
         });
+        Patient.create({
+            Name: faker.name.findName(),
+            NID: faker.random.number(),
+            Email: faker.internet.email(),
+            Birthdate: faker.date.past(),
+            Insurance: 1,
+            Address: faker.address.streetAddress(),
+            Phone: faker.phone.phoneNumber(),
+            Password: "password"
+        });
+        Medication.create({
+            Name: faker.name.firstName(),
+            TIMES: faker.random.number(),
+            DOS: faker.random.number(),
+            START: faker.date.past(),
+            Price: faker.commerce.price(),
+            END: faker.date.future()
+        })
 
     }
+});
+router.get('/add2', NotAuth, function (req, res, next) {
+    Doctor.create({
+        Name: faker.name.findName(),
+        NID: faker.random.number(),
+        Email: "doctor@test.com",
+        Phone: faker.phone.phoneNumber(),
+        Title: faker.name.title(),
+        Password: "password"
+    });
+    Patient.create({
+        Name: faker.name.findName(),
+        NID: faker.random.number(),
+        Email: "patient@test.com",
+        Birthdate: faker.date.past(),
+        Insurance: 1,
+        Address: faker.address.streetAddress(),
+        Phone: faker.phone.phoneNumber(),
+        Password: "password"
+    });
+
 });
 router.post('/login', NotAuth, function (req, res, next) {
     passport.authenticate('local', {
