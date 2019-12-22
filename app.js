@@ -14,6 +14,7 @@ var passportConfig = require('./config/passport');
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const PatientProfile = require('./routes/Patient_Profile');
 
 let app = express();
 
@@ -61,7 +62,7 @@ app.use(function (req, res, next) {
   res.locals.error = req.flash('error');
   next();
 });
-
+app.use('/patient',PatientProfile);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);

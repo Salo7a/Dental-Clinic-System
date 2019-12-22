@@ -6,15 +6,16 @@ const {NotAuth, isAuth} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
 const {Op} = require('sequelize');
 
-router.get('/login', function (req, res, next) {
-    sequelize.query("ALTER TABLE doctors AUTO_INCREMENT = 54001;").then(([results, metadata]) => {
-    });
-    Doctor.findAll().then(doctor => {
+router.get('/medication', function (req, res, next) {
+    medication.findAll({
+         
+    }).then(medication => {
 
+
+        })
         res.render('login',
             {
                 title: 'Login',
-                doctors: doctor,
                 user: req.user
             });
 
