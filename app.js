@@ -9,13 +9,15 @@ const session = require('express-session');
 const passport = require('passport');
 const engine = require('ejs-mate');
 var passportConfig = require('./config/passport');
-
+const multer = require('multer');
 
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const scansRouter = require('./routes/scans');
 
-let app = express();
+const app = express();
+
 
 //Load Environment Variables From .env File
 
@@ -37,6 +39,16 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser('secret'));
 app.use(express.static(path.join(__dirname, 'public')));
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'scans/');
+  },
+
+  // By default, multer removes file extensions so let's add them back
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+  }
+});
 app.use('/dist', express.static(path.join(__dirname, 'node_modules/admin-lte/dist')));
 app.use('/plugins', express.static(path.join(__dirname, 'node_modules/admin-lte/plugins')));
 
@@ -65,6 +77,7 @@ app.use(function (req, res, next) {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/patient', scansRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
@@ -83,3 +96,4 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
+require('./routes');
