@@ -17,6 +17,7 @@ const medication=require('./routes/medication')
 const usersRouter = require('./routes/users');
 const PatientProfile = require('./routes/Patient_Profile');
 const patientViewingRouter = require('./routes/patientPage');
+const DoctorProfile = require('./routes/Doctor_Profile');
 let app = express();
 
 //Load Environment Variables From .env File
@@ -63,6 +64,7 @@ app.use(function (req, res, next) {
   res.locals.error = req.flash('error');
   next();
 });
+app.use('/Doctor', DoctorProfile);
 app.use('/patient',PatientProfile);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
