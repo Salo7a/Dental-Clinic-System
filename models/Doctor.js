@@ -47,11 +47,11 @@ module.exports = (sequelize, DataTypes) => {
     Doctor.associate = function (models) {
         Doctor.hasMany(models.Patient, {
             foreignKey: 'Patient_id',
-            targetKey: 'id'
-        });
-        Doctor.hasOne(models.Department, {
-            foreignKey: 'Dep' ,
             sourceKey: 'id'
+        });
+        Doctor.belongsTo(models.Department, {
+            foreignKey: 'Dep' ,
+            targetKey: 'id'
         });
     };
         //Doctor.associate = function (models) {
