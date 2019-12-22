@@ -13,12 +13,10 @@ var passportConfig = require('./config/passport');
 
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-<<<<<<< HEAD
+const usersRouter = require('./routes/users')
 const PatientProfile = require('./routes/Patient_Profile');
-=======
 const patientViewingRouter = require('./routes/patientPage');
->>>>>>> 06f66dcda1a5a528b3dd8b2f56888325668bd6e4
+const medication=require('./routes/medication')
 
 let app = express();
 
@@ -71,6 +69,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/patient',patientViewingRouter);
+app.use('/Medication',medication);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -82,7 +81,7 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // render the error pagex
   res.status(err.status || 500);
   res.render('error');
 });

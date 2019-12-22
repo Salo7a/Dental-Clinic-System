@@ -9,11 +9,6 @@ module.exports = (sequelize, DataTypes) => {
 			// unique: true,
 		},
 		Birthdate: DataTypes.DATE,
-		History:
-			{
-				type :DataTypes.STRING ,
-				defaultValue : 'no record available'
-			},
 		Password: DataTypes.STRING(128),
 		Insurance: DataTypes.BOOLEAN,
 		Phone: DataTypes.STRING,
