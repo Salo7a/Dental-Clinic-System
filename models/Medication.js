@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         TIMES: DataTypes.STRING,
         DOS: DataTypes.STRING,
         START: DataTypes.STRING,
+        Price : DataTypes.STRING,
         END: DataTypes.STRING
     }, {});
     Medication.associate = function (models) {

@@ -13,8 +13,10 @@ var passportConfig = require('./config/passport');
 
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
+const medication=require('./routes/medication')
 const usersRouter = require('./routes/users');
-
+const PatientProfile = require('./routes/Patient_Profile');
+const patientViewingRouter = require('./routes/patientPage');
 let app = express();
 
 //Load Environment Variables From .env File
@@ -61,11 +63,12 @@ app.use(function (req, res, next) {
   res.locals.error = req.flash('error');
   next();
 });
-
+app.use('/patient',PatientProfile);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
-
+app.use('/patient',patientViewingRouter);
+app.use('/Medication',medication);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
@@ -77,7 +80,7 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // render the error pagex
   res.status(err.status || 500);
   res.render('error');
 });
