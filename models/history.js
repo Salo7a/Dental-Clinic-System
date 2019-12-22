@@ -5,9 +5,16 @@ module.exports = (sequelize, DataTypes) => {
         Diagonsis: DataTypes.STRING,
         DiagnosisDate: DataTypes.STRING
     }, {});
-    Medication.associate = function (models) {
-        //  models.Medication.hasMany(models.Patient);
-        //models.Medication.hasMany(models.Doctor);
+    History.associate = function (models) {
+         History.belongsTo(models.Patient,{
+             foreignKey: 'patientId',
+             targetKey: 'id'
+         });
+        History.hasOne(models.Medications,{
+            foreignKey: 'medicine',
+            sourceKey: 'id'
+        });
+        //models.Medicatiorsn.hasMany(models.Doctor);
 
     };
     return History;

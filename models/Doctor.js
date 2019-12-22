@@ -1,6 +1,6 @@
 'use strict';
 const bcrypt = require('bcryptjs');
-
+const models = require('../models')
 module.exports = (sequelize, DataTypes) => {
     const Doctor = sequelize.define('Doctor', {
         Name: DataTypes.STRING,
@@ -44,7 +44,17 @@ module.exports = (sequelize, DataTypes) => {
         },
 
     });
-    //Doctor.associate = function (models) {
+    Doctor.associate = function (models) {
+        Doctor.hasMany(models.Patient, {
+            foreignKey: 'Patient_id',
+            targetKey: 'id'
+        });
+        Doctor.hasOne(models.Department, {
+            foreignKey: 'Dep' ,
+            sourceKey: 'id'
+        });
+    };
+        //Doctor.associate = function (models) {
     // models.Doctor.hasMany(models.Patient);
         // models.Doctor.hasMany(models.Appointments);
         // models.Doctor.belongsTo(models.Department, {
