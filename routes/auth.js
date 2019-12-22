@@ -3,6 +3,7 @@ const router = express.Router();
 const passport = require('passport');
 const Doctor = require('../models').Doctor;
 const Patient = require('../models').Patient;
+const Medication = require('../models').Medication;
 const {NotAuth, isAuth} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
 const {Op} = require('sequelize');
@@ -10,12 +11,65 @@ const Chance = require('chance');
 require('dotenv').config();
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const faker = require('faker');
 
 
 router.get('/login', NotAuth, function (req, res, next) {
     res.render('login', {title: 'Login'});
 });
-
+router.get('/add', NotAuth, function (req, res, next) {
+    let i;
+    for (i = 0; i < 10; i++) {
+        Doctor.create({
+            Name: faker.name.findName(),
+            NID: faker.random.number(),
+            Email: faker.internet.email(),
+            Phone: faker.phone.phoneNumber(),
+            Title: faker.name.title(),
+            Password: "password"
+        });
+        Patient.create({
+            Name: faker.name.findName(),
+            NID: faker.random.number(),
+            Email: faker.internet.email(),
+            Birthdate: faker.date.past(),
+            Insurance: 1,
+            Address: faker.address.streetAddress(),
+            Phone: faker.phone.phoneNumber(),
+            Password: "password"
+        });
+        Medication.create({
+            Name: faker.name.firstName(),
+            TIMES: faker.random.number(),
+            DOS: faker.random.number(),
+            START: faker.date.past(),
+            Price: faker.commerce.price(),
+            END: faker.date.future()
+        })
+    }
+    res.redirect('/patient/viewDoctors');
+});
+router.get('/add2', NotAuth, function (req, res, next) {
+    Doctor.create({
+        Name: faker.name.findName(),
+        NID: faker.random.number(),
+        Email: "doctor@test.com",
+        Phone: faker.phone.phoneNumber(),
+        Title: faker.name.title(),
+        Password: "password"
+    });
+    Patient.create({
+        Name: faker.name.findName(),
+        NID: faker.random.number(),
+        Email: "patient@test.com",
+        Birthdate: faker.date.past(),
+        Insurance: 1,
+        Address: faker.address.streetAddress(),
+        Phone: faker.phone.phoneNumber(),
+        Password: "password"
+    });
+    res.redirect('/patient/viewDoctors');
+});
 router.post('/login', NotAuth, function (req, res, next) {
     passport.authenticate('local', {
         successRedirect: '/',
@@ -54,7 +108,7 @@ router.post('/register', [
         //res.status(422).json({ errors: errors.array() });
     }
     let chance = new Chance();
-    const {name, email, nid, password, phone, doctor} = req.body;
+    const {name, email, nid, password, phone, doctor, title} = req.body;
     if (doctor === "true") {
         Doctor.findOne({
             where: {
@@ -76,7 +130,8 @@ router.post('/register', [
                         NID: nid,
                         Password: password,
                         Phone: phone,
-                        ActiveHash: hash
+                        ActiveHash: hash,
+                        Title: title
                     })
                         .then(function () {
                                 const msg = {
