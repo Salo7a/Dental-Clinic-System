@@ -17,7 +17,6 @@ router.post('/profile', function (req, res, next) {
             id: req.user.id
         } 
     }).then(patient => {
-
         patient.update({
             Name:req.body.name ,
             Birthdate:req.body.BD ,
