@@ -26,7 +26,7 @@ let storage = multer.diskStorage({
     }
 });
 
-router.get('/profile', function (req, res, next) {
+router.get('/profile', isDoctor, function (req, res, next) {
 
     res.render('DoctorProfile', {title: 'My Profile', user: req.user});
 });
