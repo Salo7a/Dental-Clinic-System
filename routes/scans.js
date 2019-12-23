@@ -3,7 +3,7 @@ const router = express.Router();
 const Doctor = require('../models').Doctor;
 const Patient = require('../models').Patient;
 const Scan = require('../models').Scan;
-const {NotAuth, isAuth, imageFilter} = require('../utils/filters');
+const {NotAuth, isAuth, imageFilter, isPatient, isDoctor, isAdmin} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
 const {Op} = require('sequelize');
 const multer = require('multer');
@@ -18,12 +18,12 @@ let storage = multer.diskStorage({
 });
 
 
-router.get('/scans', function (req, res, next) {
+router.get('/scans', isPatient, function (req, res, next) {
 
     res.render('scans', {title: 'Scan Upload'});
 });
 
-router.post('/scans', (req, res, next) => {
+router.post('/scans', isPatient, (req, res, next) => {
     // 'profile_pic' is the name of our file input field in the HTML form
     let upload = multer({storage: storage, fileFilter: imageFilter}).single('scan_image');
     upload(req, res, function (err) {
