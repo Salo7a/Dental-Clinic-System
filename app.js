@@ -19,6 +19,7 @@ const scansRouter = require('./routes/scans');
 const historyRouter = require('./routes/patientHistory')
 const appointment = require('./routes/appointment')
 const appoint_DOC = require('./routes/appoint_doctor')
+const list_DOC = require('./routes/admin_LOD')
 
 const app = express();
 
@@ -82,6 +83,7 @@ app.use('/patient',patientViewingRouter);
 app.use('/Medication',medication);
 app.use('/appointment',appointment);
 app.use('/appoint_doc',appoint_DOC);
+app.use('/list_doctor',list_DOC);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
