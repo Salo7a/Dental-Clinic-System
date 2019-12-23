@@ -17,8 +17,6 @@ const medication=require('./routes/medication');
 const usersRouter = require('./routes/users');
 const scansRouter = require('./routes/scans');
 const historyRouter = require('./routes/patientHistory');
-
-const historyRouter = require('./routes/patientHistory')
 const appointment = require('./routes/appointment')
 const appoint_DOC = require('./routes/appoint_doctor')
 
