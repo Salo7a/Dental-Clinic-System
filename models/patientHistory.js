@@ -1,8 +1,9 @@
 // JavaScript source code
 'use strict';
+const bcrypt = require('bcryptjs');
 module.exports = (sequelize, DataTypes) => {
-    const History = sequelize.define('Medication', {
-        Diagonsis: DataTypes.STRING,
+    const History = sequelize.define('History', {
+        Diagnosis: DataTypes.STRING,
         DiagnosisDate: DataTypes.STRING
     }, {});
     History.associate = function (models) {

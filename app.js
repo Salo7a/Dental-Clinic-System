@@ -16,6 +16,7 @@ const indexRouter = require('./routes/index');
 const medication=require('./routes/medication')
 const usersRouter = require('./routes/users');
 const scansRouter = require('./routes/scans');
+const historyRouter = require('./routes/patientHistory')
 
 const app = express();
 
@@ -74,7 +75,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/patient', scansRouter);
-
+app.use('/patient',historyRouter);
 app.use('/patient',patientViewingRouter);
 app.use('/Medication',medication);
 // catch 404 and forward to error handler
