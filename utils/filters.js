@@ -14,7 +14,7 @@ module.exports = {
     },
     isDoctor: function (req, res, next) {
         if (req.isAuthenticated()) {
-            if (req.user.isDoctor) {
+            if (req.user.isDoctor || req.user.isAdmin) {
                 return next();
             }
             req.flash('error_msg', 'You\'re not allowed to access this page');
@@ -25,7 +25,7 @@ module.exports = {
     },
     isPatient: function (req, res, next) {
         if (req.isAuthenticated()) {
-            if (req.user.isPatient) {
+            if (req.user.isPatient || req.user.isAdmin) {
                 return next();
             }
             req.flash('error_msg', 'You\'re not allowed to access this page');
