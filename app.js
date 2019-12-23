@@ -18,6 +18,8 @@ const usersRouter = require('./routes/users');
 const PatientProfile = require('./routes/Patient_Profile');
 const patientViewingRouter = require('./routes/patientPage');
 const DoctorProfile = require('./routes/Doctor_Profile');
+const salary=require('./routes/Doctor_salary')
+const appointment=require('./routes/appointment')
 let app = express();
 
 //Load Environment Variables From .env File
@@ -71,6 +73,8 @@ app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/patient',patientViewingRouter);
 app.use('/Medication',medication);
+app.use('/salary',salary);
+app.use('/appointment',appointment);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
