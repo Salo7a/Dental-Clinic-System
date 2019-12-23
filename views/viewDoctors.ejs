@@ -1,36 +1,41 @@
 <% layout('panel') -%>
 
-
-
-
-<div class="card card-primary col-md-12">
-    <div class="card-header">
-        <h3 class="card-title">List of doctors</h3>
-        <!-- /.card-tools -->
-    </div>
-    <!-- /.card-header -->
-
-    <div class="card-body " >
-        <table id="example2" class="table table-bordered table-hover" role="grid" aria-describedby="example2_info">
-            <thead>
-            <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Title</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Doctor Name</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Department</th>
-            </thead>
-            <tbody>
+<div class="card card-solid">
+    <div class="card-body pb-0">
+        <div class="row d-flex align-items-stretch">
             <% Doctors.forEach(doctor =>  { %>
-                <tr role="row" class="odd">
-                    <td class="sorting_1"><%= doctor.Title %></td>
-                    <td><%= doctor.Name %></td>
-                   <td><!-- <%= doctor.department %> --></td>
-                </tr>
-            <% });%>
-
-            </tbody>
-        </table>
+                <div class="col-12 col-sm-6 col-md-4 d-flex align-items-stretch">
+                    <div class="card bg-light">
+                        <div class="card-header text-muted border-bottom-0">
+                            <%= doctor.Name %>
+                        </div>
+                        <div class="card-body pt-0">
+                            <div class="row">
+                                <div class="col-7">
+                                    <h2 class="lead"><b></b></h2>
+                                    <p class="text-muted text-sm"><b>Title: </b> <%= doctor.Title %> </p>
+                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-phone"></i></span> <%= doctor.Phone %></li>
+                                    </ul>
+                                </div>
+                                <div class="col-5 text-center">
+                                    <img src="/profiles/default.png " alt="" class="img-circle img-fluid">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <div class="text-right">
+                                <a href="#" class="btn btn-sm btn-primary">
+                                    <i class="fas fa-user"></i> Book now
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+          <%  });%>
+        </div>
     </div>
     <!-- /.card-body -->
-</div>
-<!-- include sorting in any table -->
-<% block('js').append('<script src="/plugins/datatables/jquery.dataTables.js"></script>') %>
-<% block('js').append('<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>') %>
-<% block('js').append('<script> $(function () {$("#example2").DataTable();})</script>') %>
 
+    <!-- /.card-footer -->
+</div>

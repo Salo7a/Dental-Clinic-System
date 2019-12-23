@@ -20,8 +20,8 @@
             <tbody>
             <% patientHistory.forEach(history =>  { %>
                 <tr role="row" class="odd">
-                    <td class="sorting_1"><%= patientHistory.patientId %></td>
-                    <td><%= history. %></td>
+                    <td class="sorting_1"><%= history.patientId %></td>
+                    <td><%= history.Diagnosis %></td>
                     <td><!-- <%= patientHistory.DiagnosisDate %> --></td>
                 </tr>
             <% });%>
