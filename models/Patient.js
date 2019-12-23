@@ -50,8 +50,11 @@ module.exports = (sequelize, DataTypes) => {
 	Patient.associate = function (models) {
         Patient.hasMany(models.Scan, {
             as: 'scan',
-            foreignKey: 'PatientId',
+            foreignKey: 'Patient_Id',
             sourceKey: 'id'
+		});
+		Patient.hasMany(models.patientHistory, {
+            as: 'history'
         });
         // models.Doctor.hasMany(models.Patient);
         // models.Doctor.hasMany(models.Appointments);
