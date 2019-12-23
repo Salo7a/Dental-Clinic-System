@@ -13,9 +13,12 @@ var passportConfig = require('./config/passport');
 
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
-const medication=require('./routes/medication')
+const medication=require('./routes/medication');
 const usersRouter = require('./routes/users');
 const scansRouter = require('./routes/scans');
+const historyRouter = require('./routes/patientHistory');
+const appointment = require('./routes/appointment')
+const appoint_DOC = require('./routes/appoint_doctor')
 
 const app = express();
 
@@ -74,9 +77,11 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
 app.use('/patient', scansRouter);
-
+app.use('/patient',historyRouter);
 app.use('/patient',patientViewingRouter);
 app.use('/Medication',medication);
+app.use('/appointment',appointment);
+app.use('/appoint_doc',appoint_DOC);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
