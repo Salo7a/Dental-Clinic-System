@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
              foreignKey: 'patientId',
              targetKey: 'id'
          });
-        History.hasOne(models.Medications,{
+        History.hasOne(models.Medication,{
             foreignKey: 'medicine',
             sourceKey: 'id'
         });
