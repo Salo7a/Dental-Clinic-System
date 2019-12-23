@@ -1,0 +1,52 @@
+<% layout('panel') -%>
+
+<form method="post" class="p-5 bg-white">
+
+    <div class="row form-group">
+      <div class="col-md-6 mb-3 mb-md-0">
+        <label class="font-weight-bold" for="fname">First Name</label>
+        <input type="text" id="fname" name="" class="form-control" placeholder="First Name">
+      </div>
+      <div class="col-md-6">
+        <label class="font-weight-bold" for="lname">Last Name</label>
+        <input type="text" id="lname" class="form-control" placeholder="Last Name">
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-6 mb-3 mb-md-0">
+        <label class="font-weight-bold" for="date">Date</label> 
+        <input type="text" id="date" class="form-control datepicker px-2" placeholder="Date of visit">
+      </div>
+      <div class="col-md-6">
+        <label class="font-weight-bold" for="email">Email</label> 
+        <input required type="email" id="email" class="form-control" placeholder="Email">
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-12">
+        <label class="font-weight-bold" for="treatment">Treatment Needed</label> 
+        <select name="treatment" id="treatment" class="form-control">
+          <option value="">Dental exam and teeth cleaning</option>
+          <option value="">Dental emergency</option>
+          <option value="">Dental implants</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-12">
+        <label class="font-weight-bold" for="note">Notes</label> 
+        <textarea name="note" id="note" cols="30" rows="5" class="form-control" placeholder="Write your notes or questions here..."></textarea>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="col-md-12">
+        <input type="submit" value="Send" class="btn btn-primary">
+      </div>
+    </div>
+
+
+  </form>
