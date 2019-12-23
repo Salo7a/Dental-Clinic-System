@@ -29,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: false
         },
         ActiveHash: DataTypes.STRING,
-        Photo: DataTypes.STRING ,
+        Photo: {
+            type: DataTypes.STRING,
+            defaultValue: "default.png"
+        },
         Title: DataTypes.STRING
     }, {
         classMethods: {
@@ -48,11 +51,11 @@ module.exports = (sequelize, DataTypes) => {
     Doctor.associate = function (models) {
         Doctor.hasMany(models.Patient, {
             foreignKey: 'Patient_id',
-            targetKey: 'id'
-        });
-        Doctor.hasOne(models.Department, {
-            foreignKey: 'Dep' ,
             sourceKey: 'id'
+        });
+        Doctor.belongsTo(models.Department, {
+            foreignKey: 'Dep' ,
+            targetKey: 'id'
         });
     };
         //Doctor.associate = function (models) {

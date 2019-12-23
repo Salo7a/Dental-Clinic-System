@@ -1,5 +1,6 @@
 'use strict';
 const bcrypt = require('bcryptjs');
+const models = require('../models');
 
 module.exports = (sequelize, DataTypes) => {
 	const Patient = sequelize.define('Patient', {
@@ -28,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
 			defaultValue: false
 		},
 		ActiveHash: DataTypes.STRING,
-		Photo: DataTypes.STRING
+		Photo: {
+			type: DataTypes.STRING,
+			defaultValue: "default.png"
+		}
 	}, {
 		classMethods: {
 			comparePassword: async function (Password, hash) {
@@ -44,15 +48,20 @@ module.exports = (sequelize, DataTypes) => {
 
 	});
 	Patient.associate = function (models) {
-		// models.Doctor.hasMany(models.Patient);
-		// models.Doctor.hasMany(models.Appointments);
-		// models.Doctor.belongsTo(models.Department, {
-		//     onDelete: "CASCADE",
-		//     foreignKey: {
-		//         allowNull: false
-		//     }
-		// });
-	};
+        Patient.hasMany(models.Scan, {
+            as: 'scan',
+            foreignKey: 'PatientId',
+            sourceKey: 'id'
+        });
+        // models.Doctor.hasMany(models.Patient);
+        // models.Doctor.hasMany(models.Appointments);
+        // models.Doctor.belongsTo(models.Department, {
+        //     onDelete: "CASCADE",
+        //     foreignKey: {
+        //         allowNull: false
+        //     }
+        // });
+    };
 	// This hook is called when an entry is being added to the back end.
 	// This method is used to hash the password before storing it
 	// in our database.
@@ -95,5 +104,5 @@ module.exports = (sequelize, DataTypes) => {
 	};
 
 
-	return Patient;
+    return Patient;
 };

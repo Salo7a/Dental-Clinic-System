@@ -3,7 +3,6 @@
 module.exports = (sequelize, DataTypes) => {
     const Medication = sequelize.define('Medication', {
         Name: DataTypes.STRING,
-        NID: DataTypes.STRING(14),
         TIMES: DataTypes.STRING,
         DOS: DataTypes.STRING,
         START: DataTypes.STRING,

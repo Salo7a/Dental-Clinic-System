@@ -6,6 +6,7 @@ const {NotAuth, isAuth} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
 const {Op} = require('sequelize');
 
+
 router.get('/login', function (req, res, next) {
     sequelize.query("ALTER TABLE doctors AUTO_INCREMENT = 54001;").then(([results, metadata]) => {
     });
