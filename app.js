@@ -20,6 +20,9 @@ const historyRouter = require('./routes/patientHistory');
 const appointment = require('./routes/appointment')
 const appoint_DOC = require('./routes/appoint_doctor')
 const list_DOC = require('./routes/admin_LOD')
+const adminpdoctor = require('./routes/Adminp_doctor')
+const depart = require('./routes/admin_depart')
+
 
 const app = express();
 
@@ -72,7 +75,7 @@ app.use(function (req, res, next) {
   res.locals.error = req.flash('error');
   next();
 });
-app.use('/Doctor', DoctorProfile);
+app.use('/doctor', DoctorProfile);
 app.use('/patient',PatientProfile);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -80,10 +83,12 @@ app.use('/auth', authRouter);
 app.use('/patient', scansRouter);
 app.use('/patient',historyRouter);
 app.use('/patient',patientViewingRouter);
-app.use('/Medication',medication);
+app.use('/medication',medication);
 app.use('/appointment',appointment);
 app.use('/appoint_doc',appoint_DOC);
-app.use('/list_doctor',list_DOC);
+app.use('/admin',list_DOC);
+app.use('/admin',adminpdoctor);
+app.use('/department',depart);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));
