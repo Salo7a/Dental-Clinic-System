@@ -29,7 +29,10 @@ module.exports = (sequelize, DataTypes) => {
 			defaultValue: false
 		},
 		ActiveHash: DataTypes.STRING,
-		Photo: DataTypes.STRING
+		Photo: {
+			type: DataTypes.STRING,
+			defaultValue: "default.png"
+		}
 	}, {
 		classMethods: {
 			comparePassword: async function (Password, hash) {

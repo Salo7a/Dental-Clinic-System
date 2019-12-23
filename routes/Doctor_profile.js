@@ -8,7 +8,7 @@ const {Op} = require('sequelize');
 
 router.get('/profile', function (req, res, next) {
 
-    res.render('doctorProfile', {title: 'My Profile'});
+    res.render('DoctorProfile', {title: 'My Profile', user: req.user});
 });
 router.post('/profile', function (req, res, next) {
     Patient.findOne({
@@ -19,12 +19,12 @@ router.post('/profile', function (req, res, next) {
     }).then(doctor => {
 
         doctor.update({
-            Name:req.body.name ,
-            Password:req.body.pass ,
-            Email:req.body.email ,
-            phone:req.body.phone
-        })
-        res.render('doctorProfile',
+            Name: req.body.name,
+            Password: req.body.pass,
+            Email: req.body.email,
+            phone: req.body.phone
+        });
+        res.render('DoctorProfile',
             {
                 title: 'My Profile',
                 user: req.user
