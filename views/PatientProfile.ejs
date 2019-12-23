@@ -1,52 +1,83 @@
 <% layout('panel') -%>
-<div class="card-body">
-  <!-- /.tab-pane -->
-  <form class="form-horizontal">
-    <div class="form-group row">
-      <label for="inputName" class="col-sm-2 col-form-label">Name</label>
-      <div class="col-sm-10">
-        <input type="text" name="name" value="<%= user.Name %>" class="form-control" id="inputName" placeholder="Name">
-      </div>
+<div class="col-md-3">
+    <div class="card card-primary">
+        <div class="card-body">
+            <img style="margin-bottom: 20px;  width: 100%; position: center;" src="/profiles/<%= user.Photo %>" alt="">
+            <form method="post" action="/patient/profile/Images" enctype="multipart/form-data">
+                <div class="form-group row">
+                    <label for="picture" class="col-md-12 col-form-label">Profile Picture</label>
+                    <div class="col-ms-12">
+                        <input id="picture" type="file" name="profile_image"/>
+                    </div>
+                </div>
+                <div class="row">
+                    <!-- /.col -->
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="form-group row">
-      <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
-      <div class="col-sm-10">
-        <input type="email" Email="email" value="<%= user.Email %>" class="form-control" id="inputEmail"
-               placeholder="Email">
-      </div>
+</div>
+<div class="col-md-6">
+    <div class="card card-primary">
+        <div class="card-body">
+            <!-- /.tab-pane -->
+            <form class="form-horizontal" method="post">
+                <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="name" value="<%= user.Name %>" class="form-control" id="name"
+                               placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" name="email" value="<%= user.Email %>" class="form-control" id="inputEmail"
+                               placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputName2" class="col-sm-2 col-form-label">Address</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="address" value="<%= user.Address %>" class="form-control"
+                               id="inputName2"
+                               placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputExperience" class="col-sm-2 col-form-label">phone</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="phone" value="<%= user.Phone %>" class="form-control" id="inputName2"
+                               placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputSkills" class="col-sm-2 col-form-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" name="pass" class="form-control" id="inputSkills"
+                               placeholder="Password">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="inputSkills" class="col-sm-2 col-form-label">Birthdate</label>
+                    <div class="col-sm-10">
+                        <input type="date" name="BD" value="<%= user.Birthdate %>" class="form-control"
+                               id="inputSkills"
+                               placeholder="Birthday">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="form-group row">
-      <label for="inputName2" class="col-sm-2 col-form-label">Address</label>
-      <div class="col-sm-10">
-        <input type="text" Address="address" value="<%= user.Address %>" class="form-control" id="inputName2"
-               placeholder="Name">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="inputExperience" class="col-sm-2 col-form-label">phone</label>
-      <div class="col-sm-10">
-        <input type="text" phone="phone" value="<%= user.Phone %>" class="form-control" id="inputName2"
-               placeholder="Name">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="inputSkills" class="col-sm-2 col-form-label">Password</label>
-      <div class="col-sm-10">
-        <input type="password" Password="pass" class="form-control" id="inputSkills" placeholder="Password">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label for="inputSkills" class="col-sm-2 col-form-label">Birthdate</label>
-      <div class="col-sm-10">
-        <input type="integer" Birthdate="BD" value="<%= user.Birthdate %>" class="form-control" id="inputSkills"
-               placeholder="Birthday">
-      </div>
-    </div>
-    <div class="form-group row">
-      <div class="offset-sm-2 col-sm-10">
-        <button type="submit" class="btn btn-danger">Submit</button>
-      </div>
-    </div>
-  </form>
 </div>
 <!-- /.tab-pane -->
+
