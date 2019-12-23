@@ -13,10 +13,10 @@ var passportConfig = require('./config/passport');
 
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
-const medication=require('./routes/medication')
+const medication=require('./routes/medication');
 const usersRouter = require('./routes/users');
 const scansRouter = require('./routes/scans');
-const historyRouter = require('./routes/patientHistory')
+const historyRouter = require('./routes/patientHistory');
 
 const app = express();
 
