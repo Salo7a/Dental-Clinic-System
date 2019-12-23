@@ -23,6 +23,17 @@ module.exports = {
         req.flash('error_msg', 'You need to be logged in!');
         res.redirect('/auth/login');
     },
+    isPatient: function (req, res, next) {
+        if (req.isAuthenticated()) {
+            if (req.user.isPatient) {
+                return next();
+            }
+            req.flash('error_msg', 'You\'re not allowed to access this page');
+            res.redirect('/auth/login');
+        }
+        req.flash('error_msg', 'You need to be logged in!');
+        res.redirect('/auth/login');
+    },
     isAdmin: function (req, res, next) {
         if (req.isAuthenticated()) {
             if (req.user.isAdmin) {
