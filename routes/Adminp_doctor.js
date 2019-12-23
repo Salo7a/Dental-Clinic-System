@@ -5,15 +5,21 @@ const {NotAuth, isAuth} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
 const {Op} = require('sequelize');
 
-router.get('/Docprofile', function (req, res, next) {
-
-    res.render('Adminp_doctor', {title: 'Doctor Profile', user: req.user});
+router.get('/Docprofile/:id', function (req, res, next) {
+    Doctor.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(result =>{
+        res.render('Adminp_doctor', {title: 'Doctor Profile', user: req.user, doctor: result})
 });
-router.post('/profile', function (req, res, next) {
+    })
+    
+router.post('/Docprofile/:id', function (req, res, next) {
     Doctor.findOne({
         where:
         {
-            id: req.user.id
+            id: req.params.id
         } 
     }).then(doctor => {
 
@@ -25,9 +31,22 @@ router.post('/profile', function (req, res, next) {
         res.render('DoctorProfile',
             {
                 title: 'My Profile',
-                user: req.user
+                user: req.user,
+                doctor: doctor
             });
 
+    });
+});
+router.post('/Docprofile/:id/delete', function (req, res, next) {
+    Doctor.findOne({
+        where:
+        {
+            id: req.params.id
+        } 
+    }).then(doctor => {
+
+        doctor.destroy();
+        res.redirect("/admin/list_doc");
     });
 });
 
