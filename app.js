@@ -22,7 +22,7 @@ const app = express();
 const PatientProfile = require('./routes/Patient_Profile');
 const patientViewingRouter = require('./routes/patientPage');
 const DoctorProfile = require('./routes/Doctor_Profile');
-let app = express();
+
 
 //Load Environment Variables From .env File
 
