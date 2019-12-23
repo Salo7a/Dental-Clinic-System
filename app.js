@@ -15,6 +15,10 @@ const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
 const medication=require('./routes/medication')
 const usersRouter = require('./routes/users');
+const scansRouter = require('./routes/scans');
+
+const app = express();
+
 const PatientProfile = require('./routes/Patient_Profile');
 const patientViewingRouter = require('./routes/patientPage');
 const DoctorProfile = require('./routes/Doctor_Profile');
@@ -69,6 +73,8 @@ app.use('/patient',PatientProfile);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
+app.use('/patient', scansRouter);
+
 app.use('/patient',patientViewingRouter);
 app.use('/Medication',medication);
 // catch 404 and forward to error handler
@@ -82,9 +88,10 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error pagex
+  // render the error page
   res.status(err.status || 500);
   res.render('error');
 });
 
 module.exports = app;
+require('./routes');

@@ -33,5 +33,13 @@ module.exports = {
         }
         req.flash('error_msg', 'You need to be logged in!');
         res.redirect('/auth/login');
+    },
+    imageFilter: function (req, file, cb) {
+        // Accept images only
+        if (!file.originalname.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+            req.fileValidationError = 'Only image files are allowed!';
+            return cb(new Error('Only image files are allowed!'), false);
+        }
+        cb(null, true);
     }
 };
