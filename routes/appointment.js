@@ -6,7 +6,7 @@ const {NotAuth, isAuth} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
 const {Op} = require('sequelize');
 const Appointment = require('../models').appointment;
-router.get('/Appointment', function (req, res, next) {
+router.get('/:id', function (req, res, next) {
 
     Appointment.findAll().then(appointment => {
 
@@ -20,5 +20,35 @@ router.get('/Appointment', function (req, res, next) {
     });
 
 });
+router.post('/:id', function (req, res, next) {
+    Appointment.findOne({
+        where:
+        {
+            Doctor_ID : req.params.id,
+            TIME: req.body.time
+        } 
+    }).then(appointment => {
+        if(!appointment)
+        {
+            Appointment.create({
+                Doctor_ID: req.params.id,
+                Patient_ID: req.user.id,
+                TIME:req.body.time,
+                Treat:req.body.treatment,
+                Notes :req.body.note
+
+            });
+           
+        }
+
+        res.render('appointment',
+            {
+                title: 'Appointment',
+                user: req.user
+            });
+
+    });
+});
+
 
 module.exports = router;
