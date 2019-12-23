@@ -27,25 +27,29 @@ router.get('/add', NotAuth, function (req, res, next) {
             Phone: faker.phone.phoneNumber(),
             Title: faker.name.title(),
             Password: "password"
+        }).then(result => {
+            Patient.create({
+                Name: faker.name.findName(),
+                NID: faker.random.number(),
+                Email: faker.internet.email(),
+                Birthdate: faker.date.past(),
+                Insurance: 1,
+                Address: faker.address.streetAddress(),
+                Phone: faker.phone.phoneNumber(),
+                Password: "password"
+            }).then(result => {
+                Medication.create({
+                    Name: faker.name.firstName(),
+                    TIMES: faker.random.number(),
+                    DOS: faker.random.number(),
+                    START: faker.date.past(),
+                    Price: faker.commerce.price(),
+                    END: faker.date.future()
+                });
+            });
         });
-        Patient.create({
-            Name: faker.name.findName(),
-            NID: faker.random.number(),
-            Email: faker.internet.email(),
-            Birthdate: faker.date.past(),
-            Insurance: 1,
-            Address: faker.address.streetAddress(),
-            Phone: faker.phone.phoneNumber(),
-            Password: "password"
-        });
-        Medication.create({
-            Name: faker.name.firstName(),
-            TIMES: faker.random.number(),
-            DOS: faker.random.number(),
-            START: faker.date.past(),
-            Price: faker.commerce.price(),
-            END: faker.date.future()
-        })
+
+
     }
     res.redirect('/patient/viewDoctors');
 });
@@ -57,6 +61,15 @@ router.get('/add2', NotAuth, function (req, res, next) {
         Phone: faker.phone.phoneNumber(),
         Title: faker.name.title(),
         Password: "password"
+    });
+    Doctor.create({
+        Name: "Admin",
+        NID: faker.random.number(),
+        Email: "admin@test.com",
+        Phone: faker.phone.phoneNumber(),
+        Title: "Mr.",
+        Password: "password",
+        isAdmin: true
     });
     Patient.create({
         Name: faker.name.findName(),
