@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const histories = require('../models').patientHistory;
+const History = require('../models').patientHistory;
 const {NotAuth, isAuth, isPatient, isDoctor, isAdmin} = require('../utils/filters');
 
 router.get('/viewHistory', isPatient, function (req, res, next) {
@@ -48,4 +49,16 @@ router.post('/viewHistory/:id', isDoctor, function (req, res, next) {
     });
 
 });
+router.get('/addHistory', function (req, res, next) {
+    History.findAll().then(function(history) {
+        res.render('addHistory', {
+            title: 'Edit History',
+            histories:history,
+            user: req.user
+
+        });
+    });
+
+});
+
 module.exports = router;

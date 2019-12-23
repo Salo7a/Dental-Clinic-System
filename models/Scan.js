@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     const Scan = sequelize.define('Scan', {
         Name: DataTypes.STRING,
         Photo: DataTypes.STRING,
-        PatientId: DataTypes.INTEGER
+        PatientId: DataTypes.INTEGER,
+
 
     }, {
         classMethods: {},
@@ -20,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         Scan.belongsTo(models.patientHistory, {
             foreignKey: 'HistoryId',
             targetKey: 'id'
-        })
+        });
     };
     // This hook is called when an entry is being added to the back end.
     // This method is used to hash the password before storing it
