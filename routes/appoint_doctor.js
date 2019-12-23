@@ -13,7 +13,9 @@ router.get('/viewappointment', function (req, res, next) {
     Appointment.findAll().then(function(appointment) {
         res.render('appoint_doctor', {
             title: 'list of appointment',
-            appoint_doctor:appointment
+            appoint_doctor:appointment,
+            user: req.user
+
         });
     });
 

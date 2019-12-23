@@ -10,7 +10,8 @@ router.get('/viewDoctors', function (req, res, next) {
     Doctor.findAll().then(doctors =>{
         res.render('viewDoctors', {
             title: 'Doctors Available',
-            Doctors: doctors
+            Doctors: doctors,
+            user: req.user
         });
     });
 
