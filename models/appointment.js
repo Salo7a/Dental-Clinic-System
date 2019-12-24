@@ -3,10 +3,10 @@
 const models = require('../models');
 module.exports = (sequelize, DataTypes) => {
     const Appointment = sequelize.define('appointment', {
-       Doctor_ID: DataTypes.INTEGER,
+        Doctor_ID: DataTypes.INTEGER,
         Patient_ID: DataTypes.INTEGER,
         TIME: DataTypes.TIME,
-       // Date: DataTypes.DATE,
+        Date: DataTypes.DATEONLY,
         Treat: DataTypes.STRING,
         Notes: DataTypes.TEXT,
     }, {});

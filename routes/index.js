@@ -9,9 +9,9 @@ router.get('/', function (req, res, next) {
     user: req.user
   });
 });
-router.get('/panel', function (req, res, next) {
+router.get('/Portal', isAuth, function (req, res, next) {
   res.render('defaultpanel', {
-    title: 'Panel Demo',
+    title: 'My Portal',
     user: req.user
   });
 });

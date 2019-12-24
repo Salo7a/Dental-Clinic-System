@@ -29,6 +29,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: false
         },
         ActiveHash: DataTypes.STRING,
+        RememberHash: DataTypes.STRING,
         Photo: {
             type: DataTypes.STRING,
             defaultValue: "default.png"
@@ -86,16 +87,20 @@ module.exports = (sequelize, DataTypes) => {
 
     });
     Doctor.beforeUpdate((Doctor, options) => {
-        return bcrypt.genSalt(10).then(async salt => {
-            await bcrypt.hash(Doctor.Password, salt).then(async hash => {
-                    Doctor.Password = hash;
-                }
-            ).catch(err => {
-                throw new Error();
-            })
-        }).catch(err => {
-            throw new Error();
-        })
+        // if(Doctor.Password.length > 6)
+        // {
+        //     return bcrypt.genSalt(10).then(async salt => {
+        //         await bcrypt.hash(Doctor.Password, salt).then(async hash => {
+        //                 Doctor.Password = hash;
+        //             }
+        //         ).catch(err => {
+        //             throw new Error();
+        //         })
+        //     }).catch(err => {
+        //         throw new Error();
+        //     })
+        // }
+
 
     });
     Doctor.prototype.comparePass = function (password) {

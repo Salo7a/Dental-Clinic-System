@@ -4,36 +4,37 @@ const models = require('../models');
 
 module.exports = (sequelize, DataTypes) => {
 	const Patient = sequelize.define('Patient', {
-		Name: DataTypes.STRING,
-		NID: {
-			type: DataTypes.STRING
-			// unique: true,
-		},
-		Birthdate: DataTypes.DATE,
-		Password: DataTypes.STRING(128),
-		Insurance: DataTypes.BOOLEAN,
-		Phone: DataTypes.STRING,
-		Address: DataTypes.STRING,
-		Email:
-			{
-				type: DataTypes.STRING,
-				isEmail: true,
-				isNull: false
-			},
-		isPatient: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: true
-		},
-		isActive: {
-			type: DataTypes.BOOLEAN,
-			defaultValue: false
-		},
-		ActiveHash: DataTypes.STRING,
-		Photo: {
-			type: DataTypes.STRING,
-			defaultValue: "default.png"
-		}
-	}, {
+        Name: DataTypes.STRING,
+        NID: {
+            type: DataTypes.STRING
+            // unique: true,
+        },
+        Birthdate: DataTypes.DATEONLY,
+        Password: DataTypes.STRING(128),
+        Insurance: DataTypes.BOOLEAN,
+        Phone: DataTypes.STRING,
+        Address: DataTypes.STRING,
+        Email:
+            {
+                type: DataTypes.STRING,
+                isEmail: true,
+                isNull: false
+            },
+        isPatient: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
+        },
+        isActive: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
+        },
+        ActiveHash: DataTypes.STRING,
+        RememberHash: DataTypes.STRING,
+        Photo: {
+            type: DataTypes.STRING,
+            defaultValue: "default.png"
+        }
+    }, {
 		classMethods: {
 			comparePassword: async function (Password, hash) {
 				// if bcrypt.compare() succeeds it'll call our function with
@@ -80,18 +81,18 @@ module.exports = (sequelize, DataTypes) => {
 
 	});
 	Patient.beforeUpdate((Patient, options) => {
-		return bcrypt.genSalt(10).then(async salt => {
-			await bcrypt.hash(Patient.Password, salt).then(async hash => {
-					Patient.Password = hash;
-				}
-			).catch(err => {
-				throw new Error();
-			})
-		}).catch(err => {
-			throw new Error();
-		})
+        // return bcrypt.genSalt(10).then(async salt => {
+        // 	await bcrypt.hash(Patient.Password, salt).then(async hash => {
+        // 			Patient.Password = hash;
+        // 		}
+        // 	).catch(err => {
+        // 		throw new Error();
+        // 	})
+        // }).catch(err => {
+        // 	throw new Error();
+        // })
 
-	});
+    });
 	Patient.prototype.comparePass = function (password) {
 		console.log("From Model: " + password);
 		return bcrypt.compareSync(password, this.Password);

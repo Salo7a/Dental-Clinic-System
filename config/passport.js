@@ -3,6 +3,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const Doctor = require('../models').Doctor;
 const Patient = require('../models').Patient;
 RememberMeStrategy = require('passport-remember-me-extended').Strategy;
+const Chance = require('chance');
 
 passport.use(new LocalStrategy({usernameField: 'email'}, function (email, password, done) {
     Doctor
@@ -42,17 +43,7 @@ passport.use(new LocalStrategy({usernameField: 'email'}, function (email, passwo
             done(err);
         });
 }));
-//  Doctor.comparePass(password).then(isMatch => {
-//      console.log(isMatch);
-//      console.log(password);
-//     if(isMatch){
-//         return done(null, Doctor, { message: 'Logged In Successfully' });
-//     }
-//     else {
-//         return done(null, false, { message: 'Wrong Password' });
-//     }
-// }).catch(function(err) { // something went wrong
-//      done(err);});
+
 // serialize session, only store user id in the session information
 passport.serializeUser(function (User, done) {
     done(null, User.id);
@@ -79,3 +70,48 @@ passport.deserializeUser(function (userId, done) {
     }
 
 });
+passport.use(new RememberMeStrategy(
+    function (token, done) {
+        Doctor
+            .findOne({where: {RememberHash: token}})
+            .then(function (user) {
+                if (!user) {
+                    Patient
+                        .findOne({where: {RememberHash: token}})
+                        .then(function (user) {
+                            user.update({
+                                RememberHash: null
+                            }).then(result => {
+                                return done(null, user);
+                            });
+                        }).catch(function (err) {
+                        return done(err, null);
+                    });
+                } else {
+                    user.update({
+                        RememberHash: null
+                    }).then(result => {
+                        return done(null, user);
+                    });
+                }
+
+            }).catch(function (err) {
+            return done(err, null);
+        });
+
+    }, issueToken
+));
+
+function issueToken(user, done) {
+    let chance = new Chance();
+    let token = chance.word({length: 60});
+    user.update({
+        RememberHash: token
+    }).then(result => {
+        return done(null, token);
+    }).catch(err => {
+        return done(err);
+    })
+}
+
+// chance.string({length: 60})

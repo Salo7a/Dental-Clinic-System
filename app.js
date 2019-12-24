@@ -63,6 +63,7 @@ console.log(process.env.SENDGRID_API_KEY);
 // Auth Middleware
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.authenticate('remember-me'));
 
 //Flash
 app.use(flash());

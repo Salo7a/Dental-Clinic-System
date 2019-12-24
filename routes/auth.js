@@ -12,10 +12,24 @@ require('dotenv').config();
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const faker = require('faker');
+let chance = new Chance();
 
+function issueToken(user, done) {
+    let chance = new Chance();
+    let token = chance.word({length: 60});
+    user.update({
+        RememberHash: token
+    }).then(result => {
+        return done(null, token);
+    }).catch(err => {
+        return done(err);
+    })
+}
 
 router.get('/login', NotAuth, function (req, res, next) {
-    res.render('login', {title: 'Login'});
+    res.render('login', {
+        title: 'Login',
+    });
 });
 router.get('/add', NotAuth, function (req, res, next) {
     let i;
@@ -51,7 +65,8 @@ router.get('/add', NotAuth, function (req, res, next) {
 
 
     }
-    res.redirect('/patient/viewDoctors');
+    req.flash("success", "10 Test Entries Were Added Successfully");
+    res.redirect('/');
 });
 router.get('/add2', NotAuth, function (req, res, next) {
     Doctor.create({
@@ -81,15 +96,30 @@ router.get('/add2', NotAuth, function (req, res, next) {
         Phone: faker.phone.phoneNumber(),
         Password: "password"
     });
-    res.redirect('/patient/viewDoctors');
+    req.flash("success", "Test Accounts Were Added Successfully");
+    res.redirect('/');
 });
-router.post('/login', NotAuth, function (req, res, next) {
-    passport.authenticate('local', {
-        successRedirect: '/',
+router.post('/login', NotAuth, passport.authenticate('local', {
+
         failureRedirect: '/auth/login',
         failureFlash: true
-    })(req, res, next);
-});
+    }), function (req, res, next) {
+        req.flash('success', 'You\'ve Logged In Successfully');
+        if (!req.body.remember_me) {
+            return next();
+        }
+
+        issueToken(req.user, function (err, token) {
+            if (err) {
+                return next(err);
+            }
+            res.cookie('remember_me', token, {path: '/', httpOnly: true, maxAge: 604800000});
+            return next();
+        });
+    },
+    function (req, res) {
+        res.redirect('/Portal');
+    });
 
 router.get('/register', NotAuth, function (req, res, next) {
     res.render('register', {title: 'Register'});
@@ -159,8 +189,7 @@ router.post('/register', [
                                 sgMail.send(msg);
                                 // set the flash message to indicate that user was
                                 // registered successfully
-                                req.flash('success' +
-                                    '_msg', 'The user was registered successfully');
+                            req.flash('success', 'The user was registered successfully');
                                 // finally redirect to login page, so that they can login
                                 // and start using our features
                                 res.redirect('/auth/login');
@@ -220,8 +249,7 @@ router.post('/register', [
                                 sgMail.send(msg);
                                 // set the flash message to indicate that user was
                                 // registered successfully
-                                req.flash('success' +
-                                    '_msg', 'The user was registered successfully');
+                            req.flash('success', 'The user was registered successfully');
                                 // finally redirect to login page, so that they can login
                                 // and start using our features
                                 res.redirect('/auth/login');
@@ -249,8 +277,9 @@ router.post('/register', [
 });
 
 router.get('/logout', isAuth, function (req, res, next) {
+    res.clearCookie('remember_me');
     req.logout();
-    req.flash('success_msg', "You're Logged Out");
+    req.flash('success', "You're Logged Out");
     res.redirect('/auth/login');
 });
 
