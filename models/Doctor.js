@@ -4,6 +4,7 @@ const models = require('../models')
 module.exports = (sequelize, DataTypes) => {
     const Doctor = sequelize.define('Doctor', {
         Name: DataTypes.STRING,
+        Salary: DataTypes.STRING,
         NID: {
             type: DataTypes.STRING,
             unique: true,

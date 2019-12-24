@@ -31,6 +31,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
+                            <% if(user.isDoctor){  %>
+                            <a href="/Doctor/viewDoctors" class="nav-link">
+                             <% };%>
                             <a href="/patient/profile" class="nav-link active">
                                 <i class="fas fa-user nav-icon"></i>
                                 <p>My Profile</p>
@@ -38,12 +41,21 @@
                         </li>
                         <li class="nav-item">
                             <a href="/patient/viewDoctors" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="far fa-user nav-icon "></i>
                                 <p>View Doctors</p>
                             </a>
                             <a href="/Medication/viewMedications" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
+                                <i class="nav-icon far fa-plus-square"></i>
                                 <p>Meds </p>
+                            </a>
+
+                            <a href="/patient/viewHistory/" class="nav-link">
+                                <i class="nav-icon fas fa-book"></i>
+                                <p>History </p>
+                            </a>
+                            <a href="/patient/scans/" class="nav-link">
+                                <i class="nav-icon fas fa-images"></i>
+                                <p>Scans </p>
                             </a>
                         </li>
                     </ul>

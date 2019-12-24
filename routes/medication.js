@@ -13,8 +13,11 @@ router.get('/viewMedications', function (req, res, next) {
     Medication.findAll().then(function(medications) {
         res.render('medication', {
             title: 'Medications Available',
-            Medications: medications
+            Medications: medications,
+            user: req.user
+
         });
+
     });
 
 });

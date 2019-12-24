@@ -1,0 +1,36 @@
+<% layout('panel') -%>
+<div class="col-md-4">
+    <div class="card card-primary">
+        <div class="card-body">
+            <div class="row">
+                <!--            Enter Your Content Here-->
+
+                <form role="form" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="exampleInputScan1">Scan name</label>
+                        <input type="text" class="form-control" name="name" id="exampleInputScan1"
+                               placeholder="Enter scan name">
+                    </div>
+                    <input type="file" name="scan_image"/>
+                    <div class="form-group">
+                        <label for="exampleInputFile">File input</label>
+                        <div class="input-group">
+                            <div class="custom-file">
+
+                                <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+
+                <!--            Enter Your Content Here-->
+            </div>
+        </div>
+    </div>
+</div>
+</div>
