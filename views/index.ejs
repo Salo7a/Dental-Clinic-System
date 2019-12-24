@@ -1,11 +1,356 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title><%= title %></title>
-  <link rel='stylesheet' href='/stylesheets/style.css'/>
+    <title>DCareMax</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900">
+    <link rel="stylesheet" href="/fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/magnific-popup.css">
+    <link rel="stylesheet" href="/css/jquery-ui.css">
+    <link rel="stylesheet" href="/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-datepicker.css">
+
+
+    <link rel="stylesheet" href="/fonts/flaticon/font/flaticon.css">
+
+    <link rel="stylesheet" href="/css/aos.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
 </head>
 <body>
-<h1><%= title %></h1>
-<p>Welcome to <%= title %>, <%= user.Name %></p>
+
+<div class="site-wrap">
+
+    <div class="site-mobile-menu">
+        <div class="site-mobile-menu-header">
+            <div class="site-mobile-menu-close mt-3">
+                <span class="icon-close2 js-menu-toggle"></span>
+            </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+    </div> <!-- .site-mobile-menu -->
+
+
+    <div class="site-navbar-wrap">
+        <div class="site-navbar-top">
+            <div class="container py-2">
+                <div class="row align-items-center">
+                    <div class="col-6">
+                        <a href="#" class="p-2 pl-0"><span class="icon-twitter"></span></a>
+                        <a href="#" class="p-2 pl-0"><span class="icon-facebook"></span></a>
+                        <a href="#" class="p-2 pl-0"><span class="icon-linkedin"></span></a>
+                        <a href="#" class="p-2 pl-0"><span class="icon-instagram"></span></a>
+                    </div>
+                    <div class="col-6">
+                        <div class="d-flex ml-auto">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="site-navbar">
+            <div class="container py-1">
+                <div class="row align-items-center">
+                    <div class="col-2">
+                        <h2 class="mb-0 site-logo"><a href="/">DCareMax</a></h2>
+                    </div>
+                    <div class="col-10">
+                        <nav class="site-navigation text-right" role="navigation">
+                            <div class="container">
+                                <div class="d-inline-block d-lg-none ml-md-0 mr-auto py-3"><a href="#"
+                                                                                              class="site-menu-toggle js-menu-toggle text-white"><span
+                                                class="icon-menu h3"></span></a></div>
+
+                                <ul class="site-menu js-clone-nav d-none d-lg-block">
+                                    <li class="active"><a href="/">Home</a>
+                                    </li>
+                                    <li><a href="/about">About Us</a></li>
+                                    <li><a href="/contact">Contact</a></li>
+                                    <% if (typeof user == 'undefined' ){ %>
+                                        <li><a href="/auth/login">Login</a></li>
+                                        <li><a href="/auth/register">Register</a></li>
+                                    <% } else { %>
+                                        <li><a href="/Portal">My Portal</a></li>
+                                        <li><a href="/patient/viewDoctors">Make An Appointment! </a></li>
+                                    <% } %>
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-blocks-cover" style="background-image: url(images/hero_bg_1.jpg);" data-aos="fade"
+         data-stellar-background-ratio="0.5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-7">
+                    <span class="sub-text">We Prioritize Your</span>
+                    <h1>Your <strong>New Smile</strong></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-block-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="site-block-feature d-flex p-4 rounded mb-4">
+                        <div class="mr-3">
+                            <span class="icon flaticon-tooth font-weight-light text-white h2"></span>
+                        </div>
+                        <div class="text">
+                            <h3>Periontodology</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="site-block-feature d-flex p-4 rounded mb-4">
+                        <div class="mr-3">
+                            <span class="icon flaticon-tooth-whitening font-weight-light text-white h2"></span>
+                        </div>
+                        <div class="text">
+                            <h3>Tooth Whitening</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="site-block-feature d-flex p-4 rounded mb-4">
+                        <div class="mr-3">
+                            <span class="icon flaticon-tooth-pliers font-weight-light text-white h2"></span>
+                        </div>
+                        <div class="text">
+                            <h3>Preventative Care</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section site-block-3">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <img src="images/img_1.jpg" alt="Image" class="img-fluid">
+                </div>
+                <div class="col-lg-6">
+                    <div class="row row-items">
+                        <div class="col-md-6">
+                            <a href="#" class="d-flex text-center feature active p-4 mb-4">
+                  <span class="align-self-center w-100">
+                    <span class="d-block mb-3">
+                      <span class="flaticon-tooth-whitening display-3"></span>
+                    </span>
+                    <h3>Tooth Whitening</h3>
+                  </span>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="d-flex text-center feature p-4 mb-4">
+                  <span class="align-self-center w-100">
+                    <span class="d-block mb-3">
+                      <span class="flaticon-stethoscope display-3"></span>
+                    </span>
+                    <h3>Stethoscope</h3>
+                  </span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="row row-items last">
+                        <div class="col-md-6">
+                            <a href="#" class="d-flex text-center feature p-4 mb-4">
+                  <span class="align-self-center w-100">
+                    <span class="d-block mb-3">
+                      <span class="flaticon-first-aid-kit display-3"></span>
+                    </span>
+                    <h3>First Aid Kit</h3>
+                  </span>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="#" class="d-flex text-center active feature p-4 mb-4">
+                  <span class="align-self-center w-100">
+                    <span class="d-block mb-3">
+                      <span class="flaticon-tooth-pliers display-3"></span>
+                    </span>
+                    <h3>Tooth Pliers</h3>
+                  </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-section site-block-appointment">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 pl-lg-5 order-1 order-lg-2">
+                    <div class="pl-lg-5 ml-lg-5">
+                        <h2 class="site-heading text-black">Online <strong>Appointment</strong> Request Form</h2>
+
+                    </div>
+                </div>
+                <div class="col-lg-6 order-2 order-lg-1">
+                    <br>
+                    <br>
+                    <br>
+
+
+                    <h4>Open Your Portal To Reserve An Appointment</h4>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="site-block-half d-block d-lg-flex site-block-video">
+        <div class="image bg-image order-2" style="background-image: url(images/hero_bg_1.jpg); ">
+            <a href="https://vimeo.com/channels/staffpicks/93951774" class="play-button popup-vimeo"><span
+                        class="icon-play"></span></a>
+        </div>
+        <div class="text order-1">
+            <h2 class="site-heading text-black mb-3">Success <strong>Stories</strong></h2>
+            <p class="lead">A Pretty Nice Video</p>
+            <p>Watch It!</p>
+        </div>
+
+    </div>
+
+
+    <div class="site-section bg-light">
+        <div class="container">
+            <div class="row mb-5 justify-content-center">
+                <div class="col-md-6 text-center">
+                    <h2 class="site-heading text-black">People <strong>Says</strong></h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="site-block-testimony p-4 text-center">
+                        <div class="mb-3">
+                            <img src="images/person_2.jpg" alt="Image" class="img-fluid">
+                        </div>
+                        <div>
+                            <p>Awesome!</p>
+                            <p><strong class="font-weight-bold">Nathalie Oscar</strong></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="site-block-testimony p-4 text-center active">
+                        <div class="mb-3">
+                            <img src="images/person_1.jpg" alt="Image" class="img-fluid">
+                        </div>
+                        <div>
+                            <p>Wonderful!</p>
+                            <p><strong class="font-weight-bold">Linda Uler</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="site-block-testimony p-4 text-center">
+                        <div class="mb-3">
+                            <img src="images/pp.jpg" alt="Image" class="img-fluid">
+                        </div>
+                        <div>
+                            <p>Cool!</p>
+                            <p><strong class="font-weight-bold">Ahmed Salah</strong></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-5 mb-lg-0">
+                    <div class="row mb-5">
+                        <div class="col-md-12">
+                            <h3 class="footer-heading mb-4">Navigation</h3>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a href="/">Home</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <ul class="list-unstyled">
+                                <li><a href="/about">About Us</a></li>
+                                <li><a href="/contact">Contact Us</a></li>
+                                <li><a href="/auth/login">Membership</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-4">
+
+
+                </div>
+
+
+                <div class="col-lg-4 mb-5 mb-lg-0">
+
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h3 class="footer-heading mb-4">Follow Us</h3>
+
+                            <div>
+                                <a href="#" class="pl-0 pr-3"><span class="icon-facebook"></span></a>
+                                <a href="#" class="pl-3 pr-3"><span class="icon-twitter"></span></a>
+                                <a href="#" class="pl-3 pr-3"><span class="icon-instagram"></span></a>
+                                <a href="#" class="pl-3 pr-3"><span class="icon-linkedin"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="row pt-5 mt-5 text-center">
+                <div class="col-md-12">
+                </div>
+
+            </div>
+        </div>
+    </footer>
+</div>
+
+<script src="/js/jquery-3.3.1.min.js"></script>
+<script src="/js/jquery-migrate-3.0.1.min.js"></script>
+<script src="/js/jquery-ui.js"></script>
+<script src="/js/popper.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/owl.carousel.min.js"></script>
+<script src="/js/jquery.stellar.min.js"></script>
+<script src="/js/jquery.countdown.min.js"></script>
+<script src="/js/jquery.magnific-popup.min.js"></script>
+<script src="/js/bootstrap-datepicker.min.js"></script>
+<script src="/js/aos.js"></script>
+
+<script src="/js/main.js"></script>
+<% include partials/toasts.ejs %>
 </body>
 </html>

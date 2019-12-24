@@ -3,7 +3,7 @@ module.exports = {
         if (req.isAuthenticated()) {
             return next();
         }
-        req.flash('error_msg', 'You need to be logged in!');
+        req.flash('error', 'You need to be logged in!');
         res.redirect('/auth/login');
     },
     NotAuth: function (req, res, next) {
@@ -17,10 +17,10 @@ module.exports = {
             if (req.user.isDoctor || req.user.isAdmin) {
                 return next();
             }
-            req.flash('error_msg', 'You\'re not allowed to access this page');
+            req.flash('error', 'You\'re not allowed to access this page');
             res.redirect('/auth/login');
         }
-        req.flash('error_msg', 'You need to be logged in!');
+        req.flash('error', 'You need to be logged in!');
         res.redirect('/auth/login');
     },
     isPatient: function (req, res, next) {
@@ -28,10 +28,10 @@ module.exports = {
             if (req.user.isPatient || req.user.isAdmin) {
                 return next();
             }
-            req.flash('error_msg', 'You\'re not allowed to access this page');
+            req.flash('error', 'You\'re not allowed to access this page');
             res.redirect('/auth/login');
         }
-        req.flash('error_msg', 'You need to be logged in!');
+        req.flash('error', 'You need to be logged in!');
         res.redirect('/auth/login');
     },
     isAdmin: function (req, res, next) {
@@ -39,10 +39,10 @@ module.exports = {
             if (req.user.isAdmin) {
                 return next();
             }
-            req.flash('error_msg', 'You\'re not allowed to access this page');
+            req.flash('error', 'You\'re not allowed to access this page');
             res.redirect('/auth/login');
         }
-        req.flash('error_msg', 'You need to be logged in!');
+        req.flash('error', 'You need to be logged in!');
         res.redirect('/auth/login');
     },
     imageFilter: function (req, file, cb) {

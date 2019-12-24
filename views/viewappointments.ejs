@@ -1,0 +1,31 @@
+<% layout('panel') -%>
+
+
+
+
+<div class="card card-primary col-md-12">
+    <div class="card-header">
+        <h3 class="card-title">Price of medications</h3>
+        <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body" style="display: block;">
+        <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+            <thead>
+            <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Patient ID</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Time</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">Date</th>
+            </thead>
+            <tbody>
+            <% appoint_doctor.forEach(appointment =>  { %>
+                <tr role="row" class="odd">
+                    <td class="sorting_1"><%= appointment.Patient_ID %></td>
+                    <td><%= appointment.TIME %></td>
+                    <td><%= appointment.Date %></td>
+
+                </tr>
+            <% });%>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>

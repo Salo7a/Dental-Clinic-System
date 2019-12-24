@@ -1,0 +1,34 @@
+<% layout('panel') -%>
+
+
+<div class="card card-primary col-md-12">
+    <div class="card-header">
+        <h3 class="card-title">Doctors' List</h3>
+        <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body" style="display: block;">
+        <table id="example2" class="table table-bordered table-hover" role="grid" aria-describedby="example2_info">
+            <thead>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Salary</th>
+            <th>Profile</th>
+            </thead>
+            <tbody>
+            <% LISTdoctor.forEach(LDOCTOR =>  { %>
+                <tr role="row" class="odd">
+                    <td class="sorting_1"><%= LDOCTOR.id %></td>
+                    <td><%= LDOCTOR.Name %></td>
+                    <td><%= LDOCTOR.Salary %></td>
+                    <td><button onclick=" window.location.href='/<%= LDOCTOR.id %>'"  >Profile</button>    </td>
+                    
+                    
+                </tr>
+            <% });%>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>

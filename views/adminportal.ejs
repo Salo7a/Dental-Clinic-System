@@ -1,0 +1,157 @@
+<% layout('panel') -%>
+
+
+<div class="col-lg-3 col-6">
+    <!-- small card -->
+    <div class="small-box bg-gradient-primary">
+        <div class="inner">
+            <h3><%= docs %></h3>
+
+            <p>Doctors</p>
+        </div>
+        <div class="icon">
+            <i class="fas fa-user"></i>
+        </div>
+        <a href="/admin/list_doc" class="small-box-footer">
+            More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
+<div class="col-lg-3 col-6">
+    <!-- small card -->
+    <div class="small-box bg-info">
+        <div class="inner">
+            <h3><%= pats %></h3>
+
+            <p>Patients</p>
+        </div>
+        <div class="icon">
+            <i class="fas fa-user-injured"></i>
+        </div>
+        <a href="/doctor/viewPatients" class="small-box-footer">
+            More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
+<div class="col-lg-3 col-6">
+    <!-- small card -->
+    <div class="small-box bg-gradient-indigo">
+        <div class="inner">
+            <h3><%= meds %></h3>
+
+            <p>Registered Medications</p>
+        </div>
+        <div class="icon">
+            <i class="fas fa-prescription-bottle"></i>
+        </div>
+        <a href="/Medication/viewMedications" class="small-box-footer">
+            More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
+<div class="col-lg-3 col-6">
+    <!-- small card -->
+    <div class="small-box bg-success">
+        <div class="inner">
+            <h3><%= conts %></h3>
+
+            <p>Messages</p>
+        </div>
+        <div class="icon">
+            <i class="fas fa-envelope"></i>
+        </div>
+        <a href="/admin/messages" class="small-box-footer">
+            More info <i class="fas fa-arrow-circle-right"></i>
+        </a>
+    </div>
+</div>
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Doctor-Appointments</h3>
+
+        <div class="card-tools">
+            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-tool" data-card-widget="remove"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="chartjs-size-monitor">
+            <div class="chartjs-size-monitor-expand">
+                <div class=""></div>
+            </div>
+            <div class="chartjs-size-monitor-shrink">
+                <div class=""></div>
+            </div>
+        </div>
+        <canvas id="pieChart"
+                style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%; display: block; width: 394px;"
+                width="394" height="250" class="chartjs-render-monitor"></canvas>
+    </div>
+    <!-- /.card-body -->
+</div>
+<% block('cs').append('<style type="text/css">@keyframes chartjs-render-animation{from{opacity:.99}to{opacity:1}}.chartjs-render-monitor{animation:chartjs-render-animation 1ms}.chartjs-size-monitor,.chartjs-size-monitor-expand,.chartjs-size-monitor-shrink{position:absolute;direction:ltr;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1}.chartjs-size-monitor-expand>div{position:absolute;width:1000000px;height:1000000px;left:0;top:0}.chartjs-size-monitor-shrink>div{position:absolute;width:200%;height:200%;left:0;top:0}</style>') %>
+<% block('js').append('<script src="../../plugins/chart.js/Chart.min.js"></script>') %>
+<% block('js').append("<script> //-------------\n" +
+        "    //- DONUT CHART -\n" +
+        "    //-------------\n" +
+        "    // Get context with jQuery - using jQuery's .get() method.\n" +
+        "    var donutChartCanvas = $('#donutChart').get(0).getContext('2d')\n" +
+        "    var donutData        = {\n" +
+        "      labels: [\n" +
+        "          'Doctor', \n" +
+        "          'Appointment',\n" +
+        "      ],\n" +
+        "      datasets: [\n" +
+        "        {\n" +
+        "          data: [" + docs + "," + apps + "500],\n" +
+        "          backgroundColor : ['#f56954', '#00a65a'],\n" +
+        "        }\n" +
+        "      ]\n" +
+        "    }\n" +
+        "    var donutOptions     = {\n" +
+        "      maintainAspectRatio : false,\n" +
+        "      responsive : true,\n" +
+        "    }\n" +
+        "    //Create pie or douhnut chart\n" +
+        "    // You can switch between pie and douhnut using the method below.\n" +
+        "    var donutChart = new Chart(donutChartCanvas, {\n" +
+        "      type: 'doughnut',\n" +
+        "      data: donutData,\n" +
+        "      options: donutOptions      \n" +
+        "    })\n" +
+        "\n" +
+        "    //-------------\n" +
+        "    //- PIE CHART -\n" +
+        "    //-------------\n" +
+        "    // Get context with jQuery - using jQuery's .get() method.\n" +
+        "    var pieChartCanvas = $('#pieChart').get(0).getContext('2d')\n" +
+        "    var pieData        = donutData;\n" +
+        "    var pieOptions     = {\n" +
+        "      maintainAspectRatio : false,\n" +
+        "      responsive : true,\n" +
+        "    }\n" +
+        "    //Create pie or douhnut chart\n" +
+        "    // You can switch between pie and douhnut using the method below.\n" +
+        "    var pieChart = new Chart(pieChartCanvas, {\n" +
+        "      type: 'pie',\n" +
+        "      data: pieData,\n" +
+        "      options: pieOptions      \n" +
+        "    })\n</script>") %>
+
+<!--<div class="col-md-3">-->
+<!--    <div class="card card-default">-->
+<!--        <div class="card-body">-->
+<!--            <div class="card-header">-->
+<!--                <h3 class="card-title">-->
+<!--                    <%= title %>-->
+<!--                </h3>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                &lt;!&ndash;            Enter Your Content Here&ndash;&gt;-->
+
+<!--                &lt;!&ndash;            Enter Your Content Here&ndash;&gt;-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
