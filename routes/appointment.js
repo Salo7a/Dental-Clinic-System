@@ -5,7 +5,7 @@ const Patient = require('../models').Patient;
 const {NotAuth, isAuth, isPatient} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
 const {Op} = require('sequelize');
-const Appointment = require('../models').appointment;
+const Appointment = require('../models').Appointment;
 router.get('/:id', isPatient, function (req, res, next) {
 
     Appointment.findAll().then(appointment => {

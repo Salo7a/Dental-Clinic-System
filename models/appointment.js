@@ -2,7 +2,7 @@
 'use strict';
 const models = require('../models');
 module.exports = (sequelize, DataTypes) => {
-    const Appointment = sequelize.define('appointment', {
+    const Appointment = sequelize.define('Appointment', {
         Doctor_ID: DataTypes.INTEGER,
         Patient_ID: DataTypes.INTEGER,
         TIME: DataTypes.TIME,

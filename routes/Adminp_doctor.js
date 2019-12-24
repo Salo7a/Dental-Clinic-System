@@ -1,19 +1,19 @@
 const express = require('express');
 const router = express.Router();
 const Doctor = require('../models').Doctor;
-const {NotAuth, isAuth} = require('../utils/filters');
+const {NotAuth, isAuth, isAdmin} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
 const {Op} = require('sequelize');
 
-router.get('/Docprofile/:id', function (req, res, next) {
+router.get('/Docprofile/:id', isAdmin, function (req, res, next) {
     Doctor.findOne({
         where: {
             id: req.params.id
         }
-    }).then(result =>{
+    }).then(result => {
         res.render('Adminp_doctor', {title: 'Doctor Profile', user: req.user, doctor: result})
+    });
 });
-    })
     
 router.post('/Docprofile/:id', function (req, res, next) {
     Doctor.findOne({

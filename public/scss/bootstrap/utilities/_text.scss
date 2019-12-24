@@ -101,5 +101,5 @@
 // Misc
 
 .text-hide {
-  @include text-hide();
+  @include text-hide($ignore-warning: true);
 }

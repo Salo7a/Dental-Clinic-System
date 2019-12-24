@@ -20,11 +20,10 @@ const PatientsRouter = require('./routes/Patients_List');
 const historyRouter = require('./routes/patientHistory');
 const appointment = require('./routes/appointment');
 const appoint_DOC = require('./routes/appoint_doctor');
-const appointment = require('./routes/appointment')
-const appoint_DOC = require('./routes/appoint_doctor')
-const list_DOC = require('./routes/admin_LOD')
-const adminpdoctor = require('./routes/Adminp_doctor')
-const depart = require('./routes/admin_depart')
+const list_DOC = require('./routes/admin_LOD');
+const adminpdoctor = require('./routes/Adminp_doctor');
+const depart = require('./routes/admin_depart');
+const AdminRouter = require('./routes/admin');
 
 
 const app = express();
@@ -105,8 +104,9 @@ app.use('/medication',medication);
 app.use('/appointment',appointment);
 app.use('/appoint_doc',appoint_DOC);
 app.use('/admin',list_DOC);
-app.use('/admin',adminpdoctor);
-app.use('/department',depart);
+app.use('/admin', adminpdoctor);
+app.use('/admin', AdminRouter);
+app.use('/department', depart);
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

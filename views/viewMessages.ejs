@@ -1,0 +1,39 @@
+<% layout('panel') -%>
+<% block('css').append('<link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.css">"></script>') %>
+
+
+<div class="card card-primary col-md-12">
+    <div class="card-header">
+        <h3 class="card-title">All Messages</h3>
+        <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body ">
+        <table id="example2" class="table table-bordered table-hover" role="grid" aria-describedby="example2_info">
+            <thead>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Message</th>
+            <tbody>
+            <% msgs.forEach(msg =>  { %>
+                <tr>
+                    <td> <%= msg.id %></td>
+                    <td><%= msg.Name %></td>
+                    <td><%= msg.Email %></td>
+                    <td><%= msg.Note %></td>
+                </tr>
+            <% }); %>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- include sorting in any table -->
+<% block('js').append('<script src="/plugins/datatables/jquery.dataTables.js"></script>') %>
+<% block('js').append('<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>') %>
+<% block('js').append('<script> $(function () {$("#example2").DataTable();})</script>') %>
+
+
