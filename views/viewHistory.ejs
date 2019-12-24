@@ -12,25 +12,21 @@
         <table id="example2" class="table table-bordered table-hover" role="grid" aria-describedby="example2_info">
             <thead>
             <tr role="row">
-                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                    aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Patient Name
+                <th>Diagnosis
                 </th>
-                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                    aria-label="Browser: activate to sort column ascending">Diagnosis
-                </th>
-                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
-                    aria-label="Platform(s): activate to sort column ascending">Diagnosis Date
-                </th>
+                <th>Diagnosis Data</th>
             </thead>
             <tbody>
             <% patientHistory.forEach(history =>  { %>
                 <tr role="row" class="odd">
-                    <td class="sorting_1"><%= history.patientId %></td>
                     <td><%= history.Diagnosis %></td>
-                    <td><!-- <%= patientHistory.DiagnosisDate %> --></td>
+                    <td> <%= history.DiagnosisDate %></td>
                 </tr>
             <% }); %>
-
+            <% if (oat.ins){ %>
+                <tr>yes</tr>
+            <% } else { %>
+            <% } %>
             </tbody>
         </table>
     </div>

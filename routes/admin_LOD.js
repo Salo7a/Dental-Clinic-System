@@ -11,7 +11,7 @@ const {Op} = require('sequelize');
 router.get('/list_doc', isAdmin, function (req, res, next) {
     listDoctor.findAll().then(function (listdoctor) {
         res.render('AD_LOD', {
-            title: 'list of doctor',
+            title: 'Doctors\' List',
             user: req.user,
             LISTdoctor: listdoctor
         });

@@ -7,14 +7,11 @@ module.exports = (sequelize, DataTypes) => {
         DiagnosisDate: DataTypes.STRING
     }, {});
     patientHistory.associate = function (models) {
-         patientHistory.belongsTo(models.Patient,{
+         patientHistory.belongsTo(models.Patient, {
              foreignKey: 'PatientId',
              targetKey: 'id'
          });
-        patientHistory.hasOne(models.Medication,{
-            foreignKey: 'medicine',
-            sourceKey: 'id'
-        });
+        patientHistory.hasOne(models.Medication);
         //models.Medicatiorsn.hasMany(models.Doctor);
 
     };

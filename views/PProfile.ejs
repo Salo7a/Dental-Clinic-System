@@ -15,14 +15,27 @@
 
             <ul class="list-group list-group-unbordered mb-3">
                 <li class="list-group-item">
-                    <b>Followers</b> <a class="float-right">1,322</a>
+                    <b>Birthdate</b> <a class="float-right"><%= patient.Birthdate %></a>
                 </li>
                 <li class="list-group-item">
-                    <b>Following</b> <a class="float-right">543</a>
+                    <b>Phone</b> <a class="float-right"><%= patient.Phone %></a>
                 </li>
                 <li class="list-group-item">
-                    <b>Friends</b> <a class="float-right">13,287</a>
+                    <b>Address</b> <a class="float-right"><%= patient.Address %></a>
                 </li>
+                <li class="list-group-item">
+                    <b>Email</b> <a class="float-right"><%= patient.Email %></a>
+                </li>
+                <li class="list-group-item">
+                    <b>Insurance</b> <a class="float-right">
+                        <% if (patient.Insurance){ %>
+                            Yes
+                        <% } else { %>
+                            No
+                        <% } %>
+                    </a>
+                </li>
+
             </ul>
 
             <a href="#" class="btn btn-primary btn-block"><b>Follow</b></a>
@@ -30,4 +43,39 @@
         <!-- /.card-body -->
     </div>
 </div>
+
+<% block('css').append('<link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.css">"></script>') %>
+<div class="card card-primary col-md-9">
+    <div class="card-header">
+        <h3 class="card-title">Histories Available</h3>
+        <!-- /.card-tools -->
+    </div>
+    <!-- /.card-header -->
+
+    <div class="card-body ">
+        <table id="example2" class="table table-bordered table-hover" role="grid" aria-describedby="example2_info">
+            <thead>
+            <tr role="row">
+                <th>#</th>
+                <th>Diagnosis</th>
+                <th>Date</th>
+            </thead>
+            <tbody>
+            <% history.forEach(hist =>  { %>
+                <tr role="row" class="odd">
+                    <td><%= hist.id %></td>
+                    <td><%= hist.Diagnosis %></td>
+                    <td> <%= hist.DiagnosisDate %></td>
+                </tr>
+            <% }); %>
+
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+<!-- include sorting in any table -->
+<% block('js').append('<script src="/plugins/datatables/jquery.dataTables.js"></script>') %>
+<% block('js').append('<script src="/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>') %>
+<% block('js').append('<script> $(function () {$("#example2").DataTable();})</script>') %>
 
