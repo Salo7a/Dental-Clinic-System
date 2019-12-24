@@ -6,7 +6,8 @@ module.exports = (sequelize, DataTypes) => {
     const Scan = sequelize.define('Scan', {
         Name: DataTypes.STRING,
         Photo: DataTypes.STRING,
-        PatientId: DataTypes.INTEGER
+        PatientId: DataTypes.INTEGER,
+
 
     }, {
         classMethods: {},
@@ -15,6 +16,10 @@ module.exports = (sequelize, DataTypes) => {
     Scan.associate = function (models) {
         Scan.belongsTo(models.Patient, {
             foreignKey: 'PatientId',
+            targetKey: 'id'
+        });
+        Scan.belongsTo(models.patientHistory, {
+            foreignKey: 'HistoryId',
             targetKey: 'id'
         });
     };

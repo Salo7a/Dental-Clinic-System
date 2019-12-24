@@ -1,11 +1,11 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+const session = require('express-session');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const db = require('./models/index');
-const flash = require('connect-flash');
-const session = require('express-session');
+const flash = require('express-flash');
 const passport = require('passport');
 const engine = require('ejs-mate');
 var passportConfig = require('./config/passport');
@@ -13,10 +13,13 @@ var passportConfig = require('./config/passport');
 
 const authRouter = require('./routes/auth');
 const indexRouter = require('./routes/index');
-const medication=require('./routes/medication');
+const medication = require('./routes/medication');
 const usersRouter = require('./routes/users');
 const scansRouter = require('./routes/scans');
+const PatientsRouter = require('./routes/Patients_List');
 const historyRouter = require('./routes/patientHistory');
+const appointment = require('./routes/appointment');
+const appoint_DOC = require('./routes/appoint_doctor');
 const appointment = require('./routes/appointment')
 const appoint_DOC = require('./routes/appoint_doctor')
 const list_DOC = require('./routes/admin_LOD')
@@ -37,7 +40,7 @@ require('dotenv').config();
 
 //Database Connection Test
 db.sequelize
-    .authenticate() //will cause an error if you don't have the database  :D "bdeehyat"
+    .authenticate()
     .then(() => console.log('DB Connection Successful'))
     .catch(err => console.log('Error: ' + err));
 
@@ -49,7 +52,7 @@ app.set('view engine', 'ejs');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
-app.use(cookieParser('secret'));
+app.use(cookieParser('keyboard'));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/dist', express.static(path.join(__dirname, 'node_modules/admin-lte/dist')));
 app.use('/plugins', express.static(path.join(__dirname, 'node_modules/admin-lte/plugins')));
@@ -57,26 +60,41 @@ app.use('/plugins', express.static(path.join(__dirname, 'node_modules/admin-lte/
 
 //Express Session
 app.use(session({
-  secret: 'secret',
-  resave: true,
-  saveUninitialized: true,
+  secret: "keyboard",
+  cookie: {maxAge: 60000},
+  resave: false,
+  saveUninitialized: false
 }));
 console.log(process.env.SENDGRID_API_KEY);
 // Auth Middleware
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(passport.authenticate('remember-me'));
 
 //Flash
 app.use(flash());
-
-app.use(function (req, res, next) {
-  res.locals.success_msg = req.flash('success_msg');
-  res.locals.error_msg = req.flash('error_msg');
-  res.locals.error = req.flash('error');
+app.use((req, res, next) => {
+  res.locals.flashMessages = req.flash();
   next();
 });
+
+
+// app.use(require('connect-flash')());
+// app.use(function (req, res, next) {
+//   res.locals.messages = require('express-messages')(req, res);
+//   next();
+// });
+// app.use(flash());
+// //
+// app.use(function (req, res, next) {
+//   res.locals.success_msg = req.flash('success_msg');
+//   res.locals.error_msg = req.flash('error_msg');
+//   res.locals.error = req.flash('error');
+//   next();
+// });
+
 app.use('/doctor', DoctorProfile);
-app.use('/patient',PatientProfile);
+app.use('/patient', PatientProfile);
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth', authRouter);
@@ -95,7 +113,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

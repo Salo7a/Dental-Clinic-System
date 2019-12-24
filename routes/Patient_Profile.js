@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Doctor = require('../models').Doctor;
 const Patient = require('../models').Patient;
+const patientHistory = require('../models').patientHistory;
 //const {NotAuth, isAuth} = require('../utils/filters');
 const {NotAuth, isAuth, imageFilter, isPatient, isDoctor, isAdmin} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
@@ -29,6 +30,16 @@ let storage = multer.diskStorage({
 router.get('/profile', isPatient, function (req, res, next) {
 
     res.render('PatientProfile', {title: 'My Profile', user: req.user});
+});
+router.get('/profile/:id', function (req, res, next) {
+    patientHistory.findOne({
+        include: [
+            {model: Patient, where: {id: req.params.id}}
+        ]
+    }).then(data => {
+        console.log(data);
+        res.render('PProfile', {title: 'My Profile', user: req.user, data: data});
+    });
 });
 
 router.post('/profile', isPatient, function (req, res, next) {
@@ -60,7 +71,6 @@ router.post('/profile', isPatient, function (req, res, next) {
             });
         }
     });
-    console.log(name);
 });
 
 router.post('/profile/Images', isPatient, function (req, res, next) {
@@ -102,3 +112,6 @@ router.post('/profile/Images', isPatient, function (req, res, next) {
 
 
 module.exports = router;
+
+
+

@@ -5,9 +5,9 @@ module.exports = (sequelize, DataTypes) => {
         Name: DataTypes.STRING,
         TIMES: DataTypes.STRING,
         DOS: DataTypes.STRING,
-        START: DataTypes.STRING,
-        Price : DataTypes.STRING,
-        END: DataTypes.STRING
+        START: DataTypes.DATEONLY,
+        Price: DataTypes.STRING,
+        END: DataTypes.DATEONLY
     }, {});
     Medication.associate = function (models) {
         //  models.Medication.hasMany(models.Patient);
