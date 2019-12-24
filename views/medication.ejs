@@ -1,8 +1,6 @@
 <% layout('panel') -%>
 
 
-
-
 <div class="card card-primary col-md-12">
     <div class="card-header">
         <h3 class="card-title">Price of medications</h3>
@@ -10,18 +8,28 @@
     </div>
     <!-- /.card-header -->
     <div class="card-body" style="display: block;">
-        <table id="example2" class="table table-bordered table-hover dataTable" role="grid" aria-describedby="example2_info">
+        <table id="example2" class="table table-bordered table-hover dataTable" role="grid"
+               aria-describedby="example2_info">
             <thead>
-            <tr role="row"><th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Name</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending">Price</th><th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending">availability</th>
+            <tr role="row">
+                <th class="sorting_asc" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                    aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending">Name
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                    aria-label="Browser: activate to sort column ascending">Price
+                </th>
+                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1"
+                    aria-label="Platform(s): activate to sort column ascending">In Stock
+                </th>
             </thead>
             <tbody>
             <% Medications.forEach(medication =>  { %>
                 <tr role="row" class="odd">
-                    <td class="sorting_1"><%= medication.Price %></td>
-                    <td><%= medication.Name %></td>
-                    
+                    <td class="sorting_1"><%= medication.Name %></td>
+                    <td><%= medication.Price %></td>
+                    <td>Yes</td>
                 </tr>
-            <% });%>
+            <% }); %>
 
             </tbody>
         </table>

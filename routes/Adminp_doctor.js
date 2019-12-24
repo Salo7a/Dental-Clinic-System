@@ -25,15 +25,15 @@ router.post('/Docprofile/:id', function (req, res, next) {
 
         doctor.update({
             Salary: req.body.Salary,
-            
-          
+            DepartmentId: req.body.depid
+        }).then(aa => {
+            res.render('DoctorProfile',
+                {
+                    title: 'My Profile',
+                    user: req.user,
+                    doctor: doctor
+                });
         });
-        res.render('DoctorProfile',
-            {
-                title: 'My Profile',
-                user: req.user,
-                doctor: doctor
-            });
 
     });
 });

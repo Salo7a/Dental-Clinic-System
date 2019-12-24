@@ -21,11 +21,11 @@
                     <td class="sorting_1"><%= LDOCTOR.id %></td>
                     <td><%= LDOCTOR.Name %></td>
                     <td><%= LDOCTOR.Salary %></td>
-                    <td><button onclick=" window.location.href='/<%= LDOCTOR.id %>'"  >Profile</button>    </td>
-                    
-                    
+                    <td><a href="/admin/Docprofile/<%= LDOCTOR.id %>" class="fa fa-user-circle fa-1x"> Profile </a></td>
+
+
                 </tr>
-            <% });%>
+            <% }); %>
 
             </tbody>
         </table>

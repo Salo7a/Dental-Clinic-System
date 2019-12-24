@@ -40,7 +40,8 @@ router.get('/add', function (req, res, next) {
             Email: faker.internet.email(),
             Phone: faker.phone.phoneNumber(),
             Title: faker.name.title(),
-            Password: "password"
+            Password: "password",
+            Salary: faker.random.number(),
         }).then(result => {
             Patient.create({
                 Name: faker.name.findName(),
