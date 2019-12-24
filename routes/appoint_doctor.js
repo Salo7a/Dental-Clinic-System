@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Doctor = require('../models').Doctor;
-const Appointment = require('../models').appointment;
+const Appointment = require('../models').Appointment;
 const Patient = require('../models').Patient;
 const {NotAuth, isAuth, imageFilter, isPatient, isDoctor, isAdmin} = require('../utils/filters');
 const {check, validationResult, body} = require('express-validator');
@@ -17,7 +17,7 @@ router.get('/viewappointments', isDoctor, function (req, res, next) {
         res.render('viewappointments', {
             title: 'list of appointments',
             appoint_doctor: appointment,
-            user: req.user
+                user: req.user
 
         });
     });
