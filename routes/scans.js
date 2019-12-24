@@ -20,7 +20,10 @@ let storage = multer.diskStorage({
 
 router.get('/scans', isPatient, function (req, res, next) {
 
-    res.render('scans', {title: 'Scan Upload'});
+    res.render('scans', {
+        title: 'Scan Upload' ,
+        user: req.user
+    });
 });
 
 router.post('/scans', isPatient, (req, res, next) => {
@@ -39,7 +42,7 @@ router.post('/scans', isPatient, (req, res, next) => {
         } else if (err) {
             return res.send(err);
         }
-
+        req.flash('success','successfully added scan');
         // Display uploaded image for user validation
         Scan.create({
             Name: req.body.name,
@@ -49,7 +52,7 @@ router.post('/scans', isPatient, (req, res, next) => {
             .then(function () {
                 res.render('scans', {
                     title: 'Scan Upload',
-                    success_msg: "successfully added scan"
+                    user: req.user
                 });
             })
     });
