@@ -1,0 +1,29 @@
+<% layout('panel') -%>
+
+<div class="col-md-4">
+    <div class="card card-primary">
+        <div class="card-body">
+            <!-- /.tab-pane -->
+            <form class="form-horizontal" method="post">
+                <div class="row form-group">
+                    <label class="font-weight-bold" for="date">Date</label>
+                    <input type="date" id="date" name="date" class="form-control datepicker px-2"
+                           placeholder="Date of visit">
+                </div>
+                <div class="row form-group">
+                    <div class="col-md-12">
+                        <label class="font-weight-bold" for="note">Notes</label>
+                        <textarea name="diagnosis" id="note" cols="30" rows="5" class="form-control"
+                                  placeholder="Write your diagnosis "></textarea>
+                    </div>
+                </div>
+
+                <div class="row form-group col-12">
+                    <div class="col-md-12">
+                        <input type="submit" value="Send" class="btn btn-primary">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

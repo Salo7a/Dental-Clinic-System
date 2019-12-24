@@ -7,8 +7,6 @@ module.exports = (sequelize, DataTypes) => {
         Name: DataTypes.STRING,
         Photo: DataTypes.STRING,
         PatientId: DataTypes.INTEGER,
-
-
     }, {
         classMethods: {},
 

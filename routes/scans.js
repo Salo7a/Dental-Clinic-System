@@ -42,14 +42,15 @@ router.post('/scans', isPatient, (req, res, next) => {
         } else if (err) {
             return res.send(err);
         }
-        req.flash('success','successfully added scan');
+
         // Display uploaded image for user validation
         Scan.create({
             Name: req.body.name,
-            File: req.file.filename,
+            Photo: req.file.filename,
             PatientId: req.user.id
         })
             .then(function () {
+                req.flash('info', 'Successfully added the scan');
                 res.render('scans', {
                     title: 'Scan Upload',
                     user: req.user
@@ -58,5 +59,32 @@ router.post('/scans', isPatient, (req, res, next) => {
     });
 });
 
+router.get('/scans/:id', isDoctor, function (req, res, next) {
+    Scan.findAll({
+        where: {
+            PatientId: req.params.id
+        }
+    }).then(scans => {
+        Patient.findOne({
+            where: {
+                id: req.params.id
+            }
+        }).then(patient => {
+            res.render('listscans', {
+                title: patient.Name + '\'s Scans',
+                user: req.user,
+                scans: scans
+            });
+        }).catch(err => {
+            req.flash('error', 'An Error Has Occured' + err);
+            res.render('listscans', {
+                title: 'Scans',
+                user: req.user,
+                scans: scans
+            });
+        });
 
+    });
+
+});
 module.exports = router;

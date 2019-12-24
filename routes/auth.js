@@ -31,7 +31,7 @@ router.get('/login', NotAuth, function (req, res, next) {
         title: 'Login',
     });
 });
-router.get('/add', NotAuth, function (req, res, next) {
+router.get('/add', function (req, res, next) {
     let i;
     for (i = 0; i < 10; i++) {
         Doctor.create({
@@ -68,7 +68,7 @@ router.get('/add', NotAuth, function (req, res, next) {
     req.flash("success", "10 Test Entries Were Added Successfully");
     res.redirect('/');
 });
-router.get('/add2', NotAuth, function (req, res, next) {
+router.get('/add2', function (req, res, next) {
     Doctor.create({
         Name: faker.name.findName(),
         NID: faker.random.number(),
