@@ -14,8 +14,8 @@ router.get('/viewappointments', isDoctor, function (req, res, next) {
             Doctor_ID: req.user.id
         }
     }).then(function (appointment) {
-        res.render('appoint_doctor', {
-            title: 'list of appointment',
+        res.render('viewappointments', {
+            title: 'list of appointments',
             appoint_doctor: appointment,
             user: req.user
 

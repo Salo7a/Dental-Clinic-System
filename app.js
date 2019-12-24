@@ -102,11 +102,12 @@ app.use('/patient',historyRouter);
 app.use('/patient',patientViewingRouter);
 app.use('/medication',medication);
 app.use('/appointment',appointment);
-app.use('/appoint_doc',appoint_DOC);
+app.use('/doctor',appoint_DOC);
 app.use('/admin',list_DOC);
 app.use('/admin', adminpdoctor);
 app.use('/admin', AdminRouter);
 app.use('/department', depart);
+app.use('/doctor',PatientsRouter );
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

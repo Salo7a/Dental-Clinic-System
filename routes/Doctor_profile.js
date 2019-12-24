@@ -26,9 +26,14 @@ let storage = multer.diskStorage({
     }
 });
 
-router.get('/profile', isDoctor, function (req, res, next) {
-
-    res.render('DoctorProfile', {title: 'My Profile', user: req.user});
+router.get('/profile/:id', isDoctor, function (req, res, next) {
+   Doctor.findOne({
+        where:
+        {
+            id: req.params.id
+        }
+    }).then
+    (res.render('DoctorProfile', {title: 'My Profile', user: req.user}))
 });
 router.post('/profile', isDoctor, function (req, res, next) {
     const {name, email, password, phone, BD, address} = req.body;

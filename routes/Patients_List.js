@@ -7,7 +7,8 @@ router.get('/viewPatients', isDoctor, function (req, res, next) {
     patients.findAll().then(function (Patients) {
         res.render('viewPatients', {
             title: 'All Patients',
-            PatientsHistory: Patients
+            PatientsHistory: Patients,
+            user: req.user
         });
     });
 
